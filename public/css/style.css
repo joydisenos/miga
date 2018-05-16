@@ -1,0 +1,32 @@
+.btn-gplay{
+	max-width: 70%;
+	display: block;
+	margin: 0 auto;
+}
+.apk{
+	padding: 30px;
+}
+.apk hr{
+	border: solid thin rgba(255,255,255,0.4);
+}
+.imagen{
+	overflow: hidden;
+	height: 300px;
+	background-size: cover;
+	background-position: center center;
+}
+.imagen-botones{
+	transform: translateY(100%);
+	-webkit-transform: translateY(100%);
+	-moz-transform: translateY(100%);
+	-o-transform: translateY(100%);
+}
+.cuerpo{
+	min-height: 90vh;
+}
+.formulario{
+	padding: 30px;
+}
+.pagination a{
+	padding: 10px;
+}
