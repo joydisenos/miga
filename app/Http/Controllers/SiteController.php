@@ -32,6 +32,6 @@ class SiteController extends Controller
     	$compra->producto_id = $request->producto_id;
     	$compra->cantidad = $request->cantidad;
     	$compra->save();
-    	return redirect('/')->with('status','Producto agregado al carrito exitosamente!');
+    	return redirect('/checkout')->with('status','Producto agregado al carrito exitosamente!');
     }
 }

@@ -96,6 +96,7 @@ $compras = Auth::user()->compra->where('ordene_id','=',0);
 	<tr>
 			<td colspan="3"> <div class="text-center">
 		<button type="submit" class="btn btn-outline-danger">Confirmar</button>
+		<a href="{{url('/')}}" class="btn btn-outline-danger">Seguir Comprando</a>
 			</div>	</td>
 		</tr>
 	@endif

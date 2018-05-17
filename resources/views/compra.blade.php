@@ -31,6 +31,8 @@
           <img class="img-fluid rounded mb-4" src="{{asset('storage').'/'.$producto->foto}}" alt="">
         </div>
         <div class="col-lg-6">
+
+          <h4 class="text-right">Precio: $<span id="precio">{{$producto->precio}}</span></h4>
           <p>{{$producto->descripcion}}</p>
 
           <form action="{{url('comprar')}}" method="post">
@@ -62,4 +64,23 @@
 
 
 </div>
+@endsection
+
+@section('scripts')
+<script>
+
+  var precio = {{$producto->precio}};
+  var value = $('#cantidad').val();
+  $('#precio').text(value*precio);
+
+    $('#cantidad').change(function(){
+
+    var precio = {{$producto->precio}};
+    var value = $('#cantidad').val();
+
+    $('#precio').text(value*precio);
+  
+    });
+
+</script>
 @endsection

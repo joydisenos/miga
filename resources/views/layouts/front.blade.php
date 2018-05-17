@@ -238,7 +238,7 @@
           Piso
         </td>
         <td>
-          <input type="text" name="piso" class="form-control" required>
+          <input type="text" name="piso" class="form-control">
         </td>
       </tr>
       <tr>
@@ -246,7 +246,7 @@
           Departamento
         </td>
         <td>
-          <input type="text" name="departamento" class="form-control" required>
+          <input type="text" name="departamento" class="form-control">
         </td>
       </tr>
       <tr>
@@ -262,7 +262,7 @@
           Observaciones
         </td>
         <td>
-          <input type="text" class="form-control" name="referencia" placeholder="Sitios de referencia" required>
+          <input type="text" class="form-control" name="referencia" placeholder="Sitios de referencia">
         </td>
       </tr>
       <tr>
