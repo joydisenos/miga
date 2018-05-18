@@ -45,7 +45,7 @@
 
                ?>
           		@foreach($cantidades as $cantidad)
-              <option value="{{$cantidad}}">{{$cantidad}} Promo</option>
+              <option value="{{$cantidad}}">{{$cantidad}} {{$producto->cantidadesdesc}}</option>
               @endforeach
           	</select>
           	<br>

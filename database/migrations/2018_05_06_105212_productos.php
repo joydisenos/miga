@@ -36,6 +36,8 @@ class Productos extends Migration
 
         $table->String('cantidades');
         
+        $table->String('cantidadesdesc');
+        
         /**
          * Foreignkeys section
          */

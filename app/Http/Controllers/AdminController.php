@@ -92,6 +92,7 @@ class AdminController extends Controller
         'descripcion' => 'required',
         'precio' => 'required',
         'cantidades' => 'required',
+        'cantidadesdesc' => 'required',
     ]);
 
         $producto = Producto::findOrFail($id);
@@ -120,6 +121,8 @@ class AdminController extends Controller
         $producto->precio = $request->precio;
 
         $producto->cantidades = $request->cantidades;
+        
+        $producto->cantidadesdesc = $request->cantidadesdesc;
 
         $producto->save();
 
@@ -136,6 +139,8 @@ class AdminController extends Controller
         'tipo' => 'required',
         'descripcion' => 'required',
         'precio' => 'required',
+        'cantidades' => 'required',
+        'cantidadesdesc' => 'required',
     ]);
 
         $file = $request->file('foto');
@@ -158,6 +163,8 @@ class AdminController extends Controller
     	$producto->precio = $request->precio;
 
         $producto->cantidades = $request->cantidades;
+        
+        $producto->cantidadesdesc = $request->cantidadesdesc;
 
     	$producto->save();
 

@@ -59,6 +59,11 @@
 			<input type="text" id="cantidades" class="form-control" name="cantidades" value="{{$producto->cantidades}}" required>
 		</div>
 
+		<div class="form-group">
+			<label for="cantidadesdesc" class="form-control">Descripción de Cantidades</label>
+			<input type="text" id="cantidadesdesc" class="form-control" name="cantidadesdesc" value="{{$producto->cantidadesdesc}}" required>
+		</div>
+
 		<button class="btn btn-danger" type="submit">actualizar</button>
 
 		
