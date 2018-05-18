@@ -15,6 +15,10 @@ $compras = Auth::user()->compra->where('ordene_id','=',0);
 	
 
 	<h3>Productos</h3>
+<div class="text-right">
+	
+	<a href="{{url('/')}}" class="btn btn-outline-danger">Seguir Comprando</a>
+</div>
 
 	<table class="table table-hover">
           <thead>

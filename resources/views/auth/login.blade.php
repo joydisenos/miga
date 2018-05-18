@@ -68,6 +68,11 @@
                                     Iniciar sesión
                                 </button>
 
+                                <button href="{{url('register')}}" class="btn btn-outline-danger">
+                                    Regístrate
+                                </button>
+                                <br>
+
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Olvido su clave?
                                 </a>

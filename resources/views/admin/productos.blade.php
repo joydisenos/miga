@@ -16,7 +16,7 @@
 				
 						<th>Foto</th>
 						<th>Nombre</th>
-						<th>Tipo</th>
+						<th>Categorías</th>
 						<th>Precio</th>
 						<th>Cantidades</th>
 						<th>Visibilidad</th>

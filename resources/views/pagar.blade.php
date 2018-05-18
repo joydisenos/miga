@@ -42,13 +42,15 @@ $preference = $mp->create_preference($preference_data);
 	<table class="table table-hover">
           <thead>
             <th><a href="{{url('pago').'/'.$orden->id.'/'.'efectivo'}}">Efectivo</a></th>
-            <th>Mercadolibre</th>
-            <th>Todopago</th>
+            <th>Tarjeta de Crédito Online Mercadopago</th>
+            <th>Tarjeta de Crédito Online Todopago</th>
+            <th>Tarjeta de Crédito al Delivery</th>
             
           </thead>
        <tbody>
 
         <tr>
+          <td></td>
           <td></td>
           <td><strong>Total</strong></td>
           <td><strong>${{$orden->total}}</strong></td>

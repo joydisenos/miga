@@ -215,10 +215,10 @@ class UsuarioController extends Controller
             $producto->save();
         }
 
-        $puntos = Auth::user()->dato;
+        // $puntos = Auth::user()->dato;
 
-        $puntos->puntos = $puntos->puntos + (($orden->total)/2);
-        $puntos->save();
+        // $puntos->puntos = $puntos->puntos + (($orden->total)/2);
+        // $puntos->save();
 
         //mail
 

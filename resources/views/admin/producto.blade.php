@@ -35,7 +35,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="tipo" class="form-control">Tipo</label>
+			<label for="tipo" class="form-control">Categoría</label>
 			<select id="tipo" class="form-control" name="tipo">
 				<option value="1">Producto</option>
 				<option value="2">Combo</option>
