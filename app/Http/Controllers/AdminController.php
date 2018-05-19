@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Producto;
 use App\Premio;
 use App\Cupone;
+use App\Principal;
+use App\Categoria;
 use App\Ordene;
 use App\User;
 
@@ -13,12 +15,44 @@ class AdminController extends Controller
 {
     //
 
+
+
     public function index()
     {
         $usuarios = User::all()->count();
         $productos = Producto::all()->count();
+         $ventas = Ordene::where('pago','!=','pendiente')->count();
+        $principal = Principal::first();
+         if(!$principal)
+         {
+            $principal = new Principal();
+            $principal->apertura = '8:00';
+            $principal->cierre = '18:00';
+            $principal->bienvenida = 'Mensaje de Bienvenida';
+            $principal->save();
+         }
 
-    	return view('admin.index',compact('usuarios','productos'));
+    	return view('admin.index',compact('usuarios','productos','ventas','principal'));
+    }
+
+    public function updateprincipal(Request $request)
+    {
+        $principal = Principal::first();
+
+        $principal->apertura = $request->apertura;
+            $principal->cierre = $request->cierre;
+            $principal->bienvenida = $request->bienvenida;
+            $principal->save();
+
+        return redirect()->back()->with('status' , 'Configuración Actualizada');
+
+    }
+
+    public function usuarios()
+    {
+        $usuarios = User::all();
+
+        return view('admin.usuarios',compact('usuarios'));
     }
 
     public function producto_activar($id, $estatus)
@@ -57,7 +91,10 @@ class AdminController extends Controller
 
     public function producto_new()
     {
-    	return view('admin.producto');
+
+        $categorias = Categoria::all();
+
+    	return view('admin.producto', compact('categorias'));
     }
 
     public function cupon_new()
@@ -88,7 +125,7 @@ class AdminController extends Controller
         $this->validate($request, [
         'foto' => 'image|unique:productos',
         'nombre' => 'required',
-        'tipo' => 'required',
+        'categoria' => 'required',
         'descripcion' => 'required',
         'precio' => 'required',
         'cantidades' => 'required',
@@ -114,7 +151,7 @@ class AdminController extends Controller
 
         $producto->nombre = $request->nombre;
 
-        $producto->tipo = $request->tipo;
+        $producto->categoria_id = $request->categoria_id;
 
         $producto->descripcion = $request->descripcion;
 
@@ -136,7 +173,7 @@ class AdminController extends Controller
         $this->validate($request, [
         'foto' => 'required|image|unique:productos,foto',
         'nombre' => 'required',
-        'tipo' => 'required',
+        'categoria_id' => 'required',
         'descripcion' => 'required',
         'precio' => 'required',
         'cantidades' => 'required',
@@ -156,7 +193,7 @@ class AdminController extends Controller
 
     	$producto->estatus = 1;
 
-    	$producto->tipo = $request->tipo;
+    	$producto->categoria_id = $request->categoria_id;
 
     	$producto->descripcion = $request->descripcion;
 
@@ -173,7 +210,7 @@ class AdminController extends Controller
     }
     public function ventas_index()
     {
-        $ventas = Ordene::all();
+        $ventas = Ordene::where('pago','!=','pendiente')->get();
 
         return view('admin.ventas',compact('ventas'));
     }
@@ -258,6 +295,12 @@ class AdminController extends Controller
         $venta= Ordene::findOrFail($id);
         $venta->estatus = $estatus;
         $venta->save();
+
+        $userid = $venta->user_id;
+
+        $dato = Dato::where('user_id', '=', $userid)->first();
+        $dato->puntos = $dato->puntos + ($venta->total / 2);
+        $dato->save();
 
         return redirect()->back()->with('status','Orden Marcada como Entregado');
     }

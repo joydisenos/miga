@@ -25,8 +25,8 @@ class Productos extends Migration
         $table->String('foto')->unique();
         
         $table->integer('estatus');
-        
-        $table->String('tipo');
+
+        $table->integer('categoria_id')->default(0);
         
         $table->longText('descripcion');
         

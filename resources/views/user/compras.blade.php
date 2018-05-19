@@ -12,6 +12,8 @@
 
 
 	<div class="col-md-8 formulario">
+
+		<h3>Historial de Compras</h3>
 	
 			<table class="table table-hover">
 		<thead>

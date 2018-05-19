@@ -19,6 +19,13 @@ class SiteController extends Controller
     	return view('inicio',compact('productos'));
     }
 
+    public function filtro($categoria)
+    {
+        $productos = Producto::where('estatus','=','1')->where('categoria_id','=',$categoria)->get();
+
+        return view('inicio',compact('productos'));
+    }
+
     public function show($id)
     {
     	$producto = Producto::findOrFail($id);

@@ -15,9 +15,13 @@ class CreateCuponesusersTable extends Migration
     {
         Schema::create('cuponesusers', function (Blueprint $table) {
             $table->increments('id');
+
             $table->biginteger('user_id');
+
             $table->biginteger('cupone_id');
+
             $table->integer('estatus')->default(1);
+            
             $table->timestamps();
         });
     }

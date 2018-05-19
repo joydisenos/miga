@@ -48,4 +48,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ordene::class);
     }
+
+    public function premio()
+    {
+        return $this->hasMany(Userpremio::class);
+    }
+
+    public function cupon()
+    {
+        return $this->hasMany(Cuponesuser::class);
+    }
 }

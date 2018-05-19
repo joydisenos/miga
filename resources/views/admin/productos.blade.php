@@ -36,16 +36,10 @@
 							{{$producto->nombre}}
 						</td>
 						<td>
-							@if($producto->tipo == 1)
-							Producto
-							@elseif($producto->tipo == 2)
-							Combo
-							@elseif($producto->tipo == 3)
-							Promoción
-							@endif
+							{{$producto->categoria->nombre}}
 						</td>
 						<td>
-							$ {{$producto->precio}}
+							${{$producto->precio}}
 						</td>
 						
 						<td>

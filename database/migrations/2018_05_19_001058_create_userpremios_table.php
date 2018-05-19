@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePrincipalTable extends Migration
+class CreateUserpremiosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreatePrincipalTable extends Migration
      */
     public function up()
     {
-        Schema::create('principal', function (Blueprint $table) {
+        Schema::create('userpremios', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->time('apertura')->default();
+            $table->integer('user_id');
 
-            $table->time('cierre');
+            $table->integer('premio_id');
 
-            $table->longText('bienvenida');
+            $table->integer('estatus')->default(1);
 
             $table->timestamps();
         });
@@ -33,6 +33,6 @@ class CreatePrincipalTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('principal');
+        Schema::dropIfExists('userpremios');
     }
 }

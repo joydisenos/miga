@@ -7,13 +7,7 @@
 <h1 class="mt-4 mb-3">{{$producto->nombre}}
         <small>
 
-         @if($producto->tipo == 1)
-              Producto
-              @elseif($producto->tipo == 2)
-              Combo
-              @elseif($producto->tipo == 3)
-              Promoción
-              @endif
+         {{$producto->categoria->nombre}}
         
         </small>
       </h1>

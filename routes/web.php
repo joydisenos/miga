@@ -12,10 +12,11 @@
 */
 
 Route::get('/', 'SiteController@index');
+Route::get('/filtro/{categoria}', 'SiteController@filtro');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'SiteController@index');
 Route::get('/compra/{id}','SiteController@show');
 Route::post('/comprar','SiteController@store')->middleware('auth');
 Route::get('/checkout', function (){
@@ -71,6 +72,12 @@ Route::prefix('admin-panel')->group(function(){
    Route::get('/cupon/{id}','AdminController@cupon_editar');
    Route::post('/cupon/{id}','AdminController@cupon_actualizar');
    Route::get('entregar/{id}/{estatus}','AdminController@entregar');
+   
+   Route::post('categoria','CategoriaController@store');
+
+   Route::post('principal','AdminController@updateprincipal');
+
+   Route::get('usuarios','AdminController@usuarios');
 });
 
 //dato Routes

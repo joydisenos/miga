@@ -68,9 +68,9 @@
                                     Iniciar sesión
                                 </button>
 
-                                <button href="{{url('register')}}" class="btn btn-outline-danger">
+                                <a href="{{url('register')}}" class="btn btn-outline-danger">
                                     Regístrate
-                                </button>
+                                </a>
                                 <br>
 
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -88,7 +88,8 @@
                         <div class="text-center">
                             <img src="{{asset('storage/logo.svg')}}" class="img-fluid" width="200" alt="">
 
-                            <p>Mensaje de Bienvenida</p>
+                            <?php $bienvenida = App\Principal::first(); ?>
+                            <p>{{$bienvenida->bienvenida}}</p>
                         </div>
                     
         </div>

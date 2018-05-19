@@ -77,7 +77,8 @@
                     <div class="col-md-6">
                         <div class="text-center">
                             <img src="{{asset('storage/logo.svg')}}" class="img-fluid" width="200" alt="">
-                            <p>Mensaje de Bienvenida</p>
+                            <?php $bienvenida = App\Principal::first(); ?>
+                            <p>{{$bienvenida->bienvenida}}</p>
                         </div>
                     </div>
 

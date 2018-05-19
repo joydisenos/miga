@@ -36,11 +36,13 @@
 		</div>
 
 		<div class="form-group">
-			<label for="tipo" class="form-control">Tipo</label>
-			<select id="tipo" class="form-control" name="tipo">
-				<option value="1" @if($producto->tipo == 1) selected @endif>Producto</option>
-				<option value="2" @if($producto->tipo == 2) selected @endif>Combo</option>
-				<option value="3" @if($producto->tipo == 3) selected @endif>Promoción</option>
+			<label for="categoria_id" class="form-control">Categoria</label>
+			<select id="categoria_id" class="form-control" name="categoria_id">
+				@foreach($categorias as $categoria)
+
+				<option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+
+				@endforeach
 			</select>
 		</div>
 

@@ -35,15 +35,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+            <?php $categorias = App\Categoria::where('estatus','=','1')->get(); ?>
+            @foreach($categorias as $categoria)
             <li class="nav-item">
-              <a class="nav-link" href="#">Promociones</a>
+              <a class="nav-link" href="{{url('/filtro').'/'.$categoria->id}}">{{$categoria->nombre}}</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Cumpleaños</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Sabores</a>
-            </li>
+            @endforeach
             <li class="nav-item">
               <a class="nav-link" href="#">Kioscos</a>
             </li>

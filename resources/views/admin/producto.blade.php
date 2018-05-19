@@ -21,6 +21,28 @@
 		<form action="{{url('admin-panel/producto')}}" method="post" enctype="multipart/form-data">
 
 		<input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
+
+		<div class="form-group">
+			<div class="row">
+				<div class="col-md-8">
+				<label for="categoria_id" class="form-control">Categoría</label>
+			<select id="categoria_id" class="form-control" name="categoria_id">
+				
+
+				@foreach($categorias as $categoria)
+
+				<option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+
+				@endforeach
+
+			</select>
+			</div>
+			<div class="col-md-4">
+				<button class="btn btn-danger" data-toggle="modal" data-target="#categorias">+ Agregar</button>
+			</div>
+			</div>
+			
+		</div>
 			
 		<div class="form-group">
 		
@@ -34,14 +56,7 @@
 			<input type="text" id="nombre" class="form-control" name="nombre" required>
 		</div>
 
-		<div class="form-group">
-			<label for="tipo" class="form-control">Categoría</label>
-			<select id="tipo" class="form-control" name="tipo">
-				<option value="1">Producto</option>
-				<option value="2">Combo</option>
-				<option value="3">Promoción</option>
-			</select>
-		</div>
+		
 
 		<div class="form-group">
 			<label for="precio" class="form-control">Precio</label>
@@ -53,14 +68,20 @@
 			<textarea type="text" id="descripcion" class="form-control" name="descripcion" required></textarea>
 		</div>
 
-		<div class="form-group">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="form-group">
 			<label for="cantidades" class="form-control">Cantidades (separadas por coma ",")</label>
 			<input type="text" id="cantidades" class="form-control" name="cantidades" required>
 		</div>
+			</div>
 
-		<div class="form-group">
-			<label for="cantidadesdesc" class="form-control">Descripción de Cantidades</label>
-			<input type="text" id="cantidadesdesc" class="form-control" name="cantidadesdesc" required>
+		<div class="col-md-4">
+			<div class="form-group">
+			<label for="cantidadesdesc" class="form-control">Descripción</label>
+			<input type="text" id="cantidadesdesc" class="form-control" name="cantidadesdesc" placeholder="Unidades / Promo" required>
+		</div>
+		</div>
 		</div>
 
 		<button class="btn btn-danger" type="submit">Guardar</button>
@@ -79,6 +100,36 @@
 </div>
 
 
+
+<!-- Modal -->
+<div class="modal fade" id="categorias" tabindex="-1" role="dialog" aria-labelledby="categoriasTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Agregar Categoría</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url('admin-panel/categoria')}}" method="post">
+        	<input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
+
+		<div class="form-group">
+			<label for="nombrecat" class="form-control">Nombre</label>
+			<input type="text" id="nombrecat" class="form-control" name="nombre" placeholder="Nombre de Categoría" required>
+		</div>
+
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-danger">Agregar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 @endsection

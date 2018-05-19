@@ -5,7 +5,20 @@
 
 @include('includes.carousel')
 
+
+<?php 
+
+  use Carbon\Carbon;
+  $hora = Carbon::now(-3);
+  $principal = App\Principal::first(); 
+
+  ?>
+
+
 <div class="bg-danger text-center text-white">
+
+  
+  {{$hora->toTimeString()}}
       <p><span class="text-yellow">Sondemiga.com - <strong>CERRADO</strong></span>
       <br>
       Reservalos para después! - También puede consultar al 02281 318667 (whatsapp disponible)

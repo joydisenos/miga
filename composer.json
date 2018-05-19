@@ -8,13 +8,15 @@
         "php": ">=7.0.0",
         "amranidev/scaffold-interface": "^1.7",
         "fideloper/proxy": "~3.3",
+        "hashids/hashids": "^2.0",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "laraveles/spanish": "^1.0",
         "mercadopago/sdk": "0.5.2",
         "nesbot/carbon": "^1.27",
         "todopago/php-sdk": "^1.10",
-        "zephia/laravel-mercadolibre": "^0.1.1"
+        "zephia/laravel-mercadolibre": "^0.1.1",
+        "nesbot/carbon": "~1.14"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

@@ -21,7 +21,7 @@ class Premios extends Migration
         Schema::create('premios',function (Blueprint $table){
 
         $table->increments('id');
-        
+
         $table->String('foto');
         
         $table->String('nombre');
