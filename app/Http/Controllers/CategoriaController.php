@@ -14,7 +14,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -61,7 +61,9 @@ class CategoriaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categoria = Categoria::findOrFail($id);
+
+        return view('admin.categoria',compact('categoria'));
     }
 
     /**
@@ -73,7 +75,11 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $categoria = Categoria::findOrFail($id);
+        $categoria->nombre = $request->nombre;
+        $categoria->save();
+
+        return redirect()->back()->with('status','Categoría Modificada con éxito');
     }
 
     /**
@@ -82,6 +88,16 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    
+    public function delete($id)
+    {
+        $categoria = Categoria::findOrFail($id);
+        $categoria->estatus= 0;
+        $categoria->save();
+
+        return redirect()->back()->with('status','Categoría Eliminada');
+    }
+
     public function destroy($id)
     {
         //

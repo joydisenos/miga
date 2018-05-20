@@ -78,7 +78,14 @@
                         <div class="text-center">
                             <img src="{{asset('storage/logo.svg')}}" class="img-fluid" width="200" alt="">
                             <?php $bienvenida = App\Principal::first(); ?>
-                            <p>{{$bienvenida->bienvenida}}</p>
+                            <p>
+
+                            @if(!$bienvenida)
+                                
+                                @else
+                                {{$bienvenida->bienvenida}}
+                                @endif
+                            </p>
                         </div>
                     </div>
 

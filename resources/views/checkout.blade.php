@@ -84,6 +84,15 @@ $compras = Auth::user()->compra->where('ordene_id','=',0);
 			</td>
 		</tr>
 		@endforeach
+
+		<tr>
+			<td colspan="3"><strong>Desea reservar para luego? indíquenos la fecha y hora</strong></td>
+		</tr>
+		<tr>
+			<td>Fecha de Entrega</td>
+			<td><input type="date" name="dia" class="form-control"></td>
+			<td><input type="time" name="hora" class="form-control"></td>
+		</tr>
 		
 		@if(Auth::user()->dato->telefono1=='')
 
@@ -100,7 +109,7 @@ $compras = Auth::user()->compra->where('ordene_id','=',0);
 	<tr>
 			<td colspan="3"> <div class="text-center">
 		<button type="submit" class="btn btn-outline-danger">Confirmar</button>
-		<a href="{{url('/')}}" class="btn btn-outline-danger">Seguir Comprando</a>
+		
 			</div>	</td>
 		</tr>
 	@endif

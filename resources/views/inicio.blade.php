@@ -10,21 +10,40 @@
 
   use Carbon\Carbon;
   $hora = Carbon::now(-3);
-  $principal = App\Principal::first(); 
+  $principal = App\Principal::first();
 
   ?>
 
 
-<div class="bg-danger text-center text-white">
+
 
   
-  {{$hora->toTimeString()}}
+
+
+  @if($hora->format('H:i') >= $principal->apertura && $hora->hour <= $principal->cierre)
+  <div class="bg-success text-center text-white">
+     {{$hora->format('H:i')}}
+      <p><span class="text-yellow">Sondemiga.com - <strong>ABIERTO</strong></span>
+      <br>
+      También puede consultar al 02281 318667 (whatsapp disponible)
+      </p>
+  
+
+</div>
+  @else
+
+
+  <div class="bg-danger text-center text-white">
       <p><span class="text-yellow">Sondemiga.com - <strong>CERRADO</strong></span>
       <br>
       Reservalos para después! - También puede consultar al 02281 318667 (whatsapp disponible)
       </p>
+  
 
 </div>
+ 
+  @endif
+
 
 
 <div class="container">

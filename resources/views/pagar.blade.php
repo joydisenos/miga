@@ -12,15 +12,27 @@ $mp = new MP("1787728543868124", "6nXoG9IfPRwUL4BXWW2IDkweUSH40Hn6");
 
 
 $preference_data = array(
-    "items" => array(
+    
+
+"items" => array(
         array(
             "title" => "Title of what you are paying for",
-            "currency_id" => "ARS",
-            "category_id" => "Venta Sondemiga",
+            "currency_id" => "USD",
+            "category_id" => "Category",
             "quantity" => 1,
-            "unit_price" => (int)$orden->total
+            "unit_price" => 10.2
         )
-    )
+    ),
+
+  "back_urls" => array(
+            "success" => url('pago').'/'.$orden->id.'/'.'mercadopago',
+            "failure" => url('pago/fail'),
+            "pending" => url('pago/pendiente')
+        )
+
+
+
+
 );
 
 $preference = $mp->create_preference($preference_data);
@@ -34,7 +46,7 @@ $preference = $mp->create_preference($preference_data);
 	
 <div class="row">
 	
-<div class="col-md-6 formulario">
+<div class="col-md-12 formulario">
 	
 
 	<h3>Elegir Método de Pago</h3>
@@ -42,28 +54,25 @@ $preference = $mp->create_preference($preference_data);
 	<table class="table table-hover">
           <thead>
             <th><a href="{{url('pago').'/'.$orden->id.'/'.'efectivo'}}">Efectivo</a></th>
-            <th>Tarjeta de Crédito Online Mercadopago</th>
-            <th>Tarjeta de Crédito Online Todopago</th>
-            <th>Tarjeta de Crédito al Delivery</th>
+            <th><a href="<?php echo $preference["response"]["init_point"]; ?>" name="MP-Checkout" class="orange-ar-m-sq-arall">Tarjeta de Crédito Online Mercadopago</a>
+        <script type="text/javascript" src="//resources.mlstatic.com/mptools/render.js"></script></th>
+            <th><a href="{{url('pago').'/'.$orden->id.'/'.'tarjetaAlDelivery'}}">Tarjeta de Crédito al Delivery</a></th>
             
           </thead>
        <tbody>
 
         <tr>
-          <td></td>
-          <td></td>
+         
           <td><strong>Total</strong></td>
           <td><strong>${{$orden->total}}</strong></td>
           <td></td>
+
         </tr>
       </tbody>
         </table>
 
 </div>
-<div class="col-md-6 formulario">
-	
-	
-</div>
+
 </div>
 
 	

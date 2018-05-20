@@ -30,6 +30,8 @@ class Ordenes extends Migration
         
         $table->integer('estatus');
 
+        $table->string('entrega');
+
         $table->string('pago');
         
         /**

@@ -27,6 +27,8 @@ Route::get('/checkout', function (){
 Route::post('checkout','UsuarioController@orden_store');
 
 Route::get('/pago/{id}/{tipo}', 'UsuarioController@definir_pago');
+Route::get('/pago/fail', 'UsuarioController@fail');
+Route::get('/pago/pendiente', 'UsuarioController@pendiente');
 
 //User
 
@@ -78,6 +80,14 @@ Route::prefix('admin-panel')->group(function(){
    Route::post('principal','AdminController@updateprincipal');
 
    Route::get('usuarios','AdminController@usuarios');
+
+   Route::get('/categoria/edit/{id}','CategoriaController@edit');
+   
+   Route::get('/categoria/eliminar/{id}','CategoriaController@delete');
+   
+   Route::post('/categoria/{id}','CategoriaController@update');
+
+
 });
 
 //dato Routes

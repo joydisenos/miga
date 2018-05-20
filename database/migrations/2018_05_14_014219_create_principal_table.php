@@ -16,9 +16,9 @@ class CreatePrincipalTable extends Migration
         Schema::create('principal', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->time('apertura')->default();
+            $table->time('apertura')->default('8:00');
 
-            $table->time('cierre');
+            $table->time('cierre')->default('16:00');
 
             $table->longText('bienvenida');
 

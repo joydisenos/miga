@@ -92,7 +92,7 @@ class AdminController extends Controller
     public function producto_new()
     {
 
-        $categorias = Categoria::all();
+        $categorias = Categoria::where('estatus','=',1)->get();
 
     	return view('admin.producto', compact('categorias'));
     }
@@ -116,8 +116,9 @@ class AdminController extends Controller
     public function producto_editar($id)
     {
         $producto = Producto::findOrFail($id);
+        $categorias = Categoria::where('estatus','=',1)->get();
 
-        return view('admin.producto-edit',compact('producto'));
+        return view('admin.producto-edit',compact('producto','categorias'));
     }
 
     public function producto_actualizar($id, Request $request)

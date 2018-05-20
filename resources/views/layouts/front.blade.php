@@ -35,12 +35,33 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <?php $categorias = App\Categoria::where('estatus','=','1')->get(); ?>
-            @foreach($categorias as $categoria)
-            <li class="nav-item">
-              <a class="nav-link" href="{{url('/filtro').'/'.$categoria->id}}">{{$categoria->nombre}}</a>
+
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Categorías
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                
+               
+
+               
+
+                
+                <?php $categorias = App\Categoria::where('estatus','=','1')->get(); ?>
+                  
+                  @foreach($categorias as $categoria)
+                  
+
+                   <a class="dropdown-item" href="{{url('/filtro').'/'.$categoria->id}}">{{$categoria->nombre}}</a>
+                  @endforeach
+                
+                                
+              </div>
             </li>
-            @endforeach
+
+
+            
             <li class="nav-item">
               <a class="nav-link" href="#">Kioscos</a>
             </li>

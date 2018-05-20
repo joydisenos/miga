@@ -177,6 +177,12 @@ class UsuarioController extends Controller
         
         $orden->estatus = 0;
 
+        if(!$request->dia && $request->hora)
+        {
+            $orden->entrega = 'inmediata';
+        }
+        $orden->entrega = 'Día de Entrega: '.$request->dia.' Hora:'.$request->hora;
+
         $orden->pago = 'pendiente';
 
         $orden->save();

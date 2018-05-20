@@ -39,6 +39,7 @@
 			</div>
 			<div class="col-md-4">
 				<button class="btn btn-danger" data-toggle="modal" data-target="#categorias">+ Agregar</button>
+				<button class="btn btn-danger" data-toggle="modal" data-target="#categoriaindex">Listado</button>
 			</div>
 			</div>
 			
@@ -131,5 +132,48 @@
   </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="categoriaindex" tabindex="-1" role="dialog" aria-labelledby="categoriaindexTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Agregar Categoría</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+		<table class="table table-hover">
+
+			<thead>
+				<th>
+					Nombre
+				</th>
+				<th>
+					Modificar
+				</th>
+			</thead>
+
+			@foreach($categorias as $categoria)
+			<tr>
+				<td>{{$categoria->nombre}}</td>
+				<td>
+					<a class="btn btn-outline-danger" href="{{url('admin-panel/categoria').'/edit/'.$categoria->id}}"><i class="far fa-edit"></i></a>
+					<a class="btn btn-danger" href="{{url('admin-panel/categoria').'/eliminar/'.$categoria->id}}">x</a>
+				</td>
+			</tr>
+			@endforeach
+			
+		</table>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
 @endsection
