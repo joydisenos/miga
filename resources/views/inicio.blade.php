@@ -12,7 +12,7 @@
   $hora = Carbon::now(-3);
   $principal = App\Principal::first();
 
-  ?>
+?>
 
 
 
@@ -20,9 +20,94 @@
   
 
 
-  @if($hora->format('H:i') >= $principal->lunesa && $hora->hour <= $principal->lunesc)
+  @if(
+
+  $hora->format('l') >= 'Monday' && 
+  $hora->format('H:i') >= $principal->lunesa && 
+  $hora->hour <= $principal->lunesc
+
+  ||
+
+  $hora->format('l') >= 'Monday' && 
+  $hora->format('H:i') >= $principal->lunesat && 
+  $hora->hour <= $principal->lunesct
+
+  ||
+
+  $hora->format('l') >= 'Tuesday' && 
+  $hora->format('H:i') >= $principal->martesa && 
+  $hora->hour <= $principal->martesc
+
+  ||
+
+  $hora->format('l') >= 'Tuesday' && 
+  $hora->format('H:i') >= $principal->martesat && 
+  $hora->hour <= $principal->martesct
+
+  ||
+
+  $hora->format('l') >= 'Wednesday' && 
+  $hora->format('H:i') >= $principal->miercolesa && 
+  $hora->hour <= $principal->miercolesc
+
+  ||
+
+  $hora->format('l') >= 'Wednesday' && 
+  $hora->format('H:i') >= $principal->miercolesat && 
+  $hora->hour <= $principal->miercolesct
+
+  ||
+
+  $hora->format('l') >= 'Thursday' && 
+  $hora->format('H:i') >= $principal->juevesa && 
+  $hora->hour <= $principal->juevesc
+
+  ||
+
+  $hora->format('l') >= 'Thursday' && 
+  $hora->format('H:i') >= $principal->juevesat && 
+  $hora->hour <= $principal->juevesct
+
+  ||
+
+  $hora->format('l') >= 'Friday' && 
+  $hora->format('H:i') >= $principal->juevesa && 
+  $hora->hour <= $principal->juevesc
+
+  ||
+
+  $hora->format('l') >= 'Friday' && 
+  $hora->format('H:i') >= $principal->juevesat && 
+  $hora->hour <= $principal->juevesct
+
+  ||
+
+  $hora->format('l') >= 'Saturday' && 
+  $hora->format('H:i') >= $principal->sabadoa && 
+  $hora->hour <= $principal->sabadoc
+
+  ||
+
+  $hora->format('l') >= 'Saturday' && 
+  $hora->format('H:i') >= $principal->sabadoat && 
+  $hora->hour <= $principal->sabadoct
+
+  ||
+
+  $hora->format('l') >= 'Sunday' && 
+  $hora->format('H:i') >= $principal->domingoa && 
+  $hora->hour <= $principal->domingoc
+  
+  ||
+
+  $hora->format('l') >= 'Sunday' && 
+  $hora->format('H:i') >= $principal->domingoat && 
+  $hora->hour <= $principal->domingoct
+
+  )
+
   <div class="bg-success text-center text-white">
-     {{$hora->format('H:i')}}
+     {{$hora->format('l')}} {{$hora->format('H:i')}}
       <p><span class="text-yellow">Sondemiga.com - <strong>ABIERTO</strong></span>
       <br>
       También puede consultar al 02281 318667 (whatsapp disponible)
@@ -30,10 +115,18 @@
   
 
 </div>
+
+
+
+
+
+
+
   @else
 
 
   <div class="bg-danger text-center text-white">
+    {{$hora->format('l')}} {{$hora->format('H:i')}}
       <p><span class="text-yellow">Sondemiga.com - <strong>CERRADO</strong></span>
       <br>
       Reservalos para después! - También puede consultar al 02281 318667 (whatsapp disponible)

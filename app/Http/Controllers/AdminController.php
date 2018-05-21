@@ -39,11 +39,7 @@ class AdminController extends Controller
     public function updateprincipal(Request $request)
     {
         $principal = Principal::first();
-
-        $principal->lunesa = $request->lunesa;
-            $principal->lunesc = $request->lunesc;
-            $principal->bienvenida = $request->bienvenida;
-            $principal->save();
+        $principal->update($request->all());
 
         return redirect()->back()->with('status' , 'Configuración Actualizada');
 
