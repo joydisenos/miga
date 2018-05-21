@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2781d694f6f01bff7ba1899c86b91747",
+    "content-hash": "425b7248d5ae8618bce36c411a991d23",
     "packages": [
         {
             "name": "amranidev/ajaxis",

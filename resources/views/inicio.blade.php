@@ -20,7 +20,7 @@
   
 
 
-  @if($hora->format('H:i') >= $principal->apertura && $hora->hour <= $principal->cierre)
+  @if($hora->format('H:i') >= $principal->lunesa && $hora->hour <= $principal->lunesc)
   <div class="bg-success text-center text-white">
      {{$hora->format('H:i')}}
       <p><span class="text-yellow">Sondemiga.com - <strong>ABIERTO</strong></span>

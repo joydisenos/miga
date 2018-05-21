@@ -187,6 +187,7 @@ class UsuarioController extends Controller
 
         $orden->save();
 
+        
 
 
         return view('pagar',compact('orden'));
@@ -196,7 +197,7 @@ class UsuarioController extends Controller
 
     public function compras()
     {
-        $compras = Auth::user()->ordenes;
+        $compras = Auth::user()->ordenes->Where('pago','!=','pendiente');
 
         return view ('user.compras',compact('compras'));
     }

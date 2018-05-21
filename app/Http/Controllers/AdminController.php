@@ -9,6 +9,7 @@ use App\Cupone;
 use App\Principal;
 use App\Categoria;
 use App\Ordene;
+use App\Dato;
 use App\User;
 
 class AdminController extends Controller
@@ -26,8 +27,8 @@ class AdminController extends Controller
          if(!$principal)
          {
             $principal = new Principal();
-            $principal->apertura = '8:00';
-            $principal->cierre = '18:00';
+            $principal->lunesa = '8:00';
+            $principal->lunesc = '18:00';
             $principal->bienvenida = 'Mensaje de Bienvenida';
             $principal->save();
          }
@@ -39,8 +40,8 @@ class AdminController extends Controller
     {
         $principal = Principal::first();
 
-        $principal->apertura = $request->apertura;
-            $principal->cierre = $request->cierre;
+        $principal->lunesa = $request->lunesa;
+            $principal->lunesc = $request->lunesc;
             $principal->bienvenida = $request->bienvenida;
             $principal->save();
 
@@ -104,7 +105,15 @@ class AdminController extends Controller
 
     public function cupon_store(Request $request)
     {
+
+        $this->validate($request, [
+        
+        'nombre' => 'required',
+        'porcentaje' => 'required',
+        'puntos' => 'required',
+    ]);
         $cupon = new Cupone();
+        $cupon->nombre= $request->nombre;
         $cupon->estatus = 1;
         $cupon->porcentaje = $request->porcentaje;
         $cupon->puntos = $request->puntos;
@@ -304,5 +313,11 @@ class AdminController extends Controller
         $dato->save();
 
         return redirect()->back()->with('status','Orden Marcada como Entregado');
+    }
+    public function config()
+    {
+        $principal = Principal::first();
+
+        return view('admin.config',compact('principal'));
     }
 }

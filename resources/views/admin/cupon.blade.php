@@ -22,7 +22,10 @@
 
 		<input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
 			
-		
+		<div class="form-group">
+			<label for="nombre" class="form-control">Nombre</label>
+			<input type="text" id="nombre" class="form-control" name="nombre" required>
+		</div>
 			
 		<div class="form-group">
 			<label for="puntos" class="form-control">Puntos</label>

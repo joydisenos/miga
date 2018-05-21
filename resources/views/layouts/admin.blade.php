@@ -57,9 +57,9 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
                 
-                <!--
-                <a class="dropdown-item" href="{{url('admin-panel')}}">Panel de Control</a>
-                -->
+                
+                <a class="dropdown-item" href="{{url('admin-panel/config')}}">Configuración</a>
+                
                
 
                 <hr>

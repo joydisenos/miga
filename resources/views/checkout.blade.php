@@ -29,7 +29,7 @@ $compras = Auth::user()->compra->where('ordene_id','=',0);
           </thead>
        <tbody>
 
-        <?php $total=0; ?>
+        <?php $subtotal=0; ?>
         @foreach($compras as $compra)
 
         <tr>
@@ -38,13 +38,52 @@ $compras = Auth::user()->compra->where('ordene_id','=',0);
           <td>${{$compra->cantidad*($compra->producto->precio)}}</td>
           
         </tr>
-        <?php $total = $total + ($compra->cantidad*($compra->producto->precio)) ?>
+        
+
+        <?php $subtotal = $subtotal + ($compra->cantidad*($compra->producto->precio)) ?>
 
           
 
       
                   
         @endforeach
+
+        @if($subtotal >= 600)
+        <tr>
+        	<td></td>
+        	<td>Subtotal</td>
+        	<td>${{$subtotal}}</td>
+        </tr>
+        <tr>
+        	<td></td>
+        	<td>- 5% Descuento</td>
+        	<?php 
+
+        	//Variables
+        	$porcentaje = 5;
+        	$descuento = ($subtotal * $porcentaje)/100;
+        	$envio = 0;
+
+
+        	$total = ($subtotal - $descuento) + $envio;        	
+        	?>
+        	<td>${{$total}}</td>
+        </tr>
+        @else
+
+        <?php 
+
+        //Variables
+        $envio = 0; 
+        $total = $subtotal + $envio; 
+        ?>
+
+        @endif
+        <tr>
+        	<td></td>
+        	<td>Envío</td>
+        	<td>${{$envio}}</td>
+        </tr>
 
         <tr>
           <td></td>
@@ -89,9 +128,53 @@ $compras = Auth::user()->compra->where('ordene_id','=',0);
 			<td colspan="3"><strong>Desea reservar para luego? indíquenos la fecha y hora</strong></td>
 		</tr>
 		<tr>
-			<td>Fecha de Entrega</td>
-			<td><input type="date" name="dia" class="form-control"></td>
-			<td><input type="time" name="hora" class="form-control"></td>
+			<td>Día de Entrega</td>
+			<td colspan="2">
+
+				<select name="dia" class="form-control">
+					<option value="lunes">Lunes</option>
+					<option value="martes">Martes</option>
+					<option value="miercoles">Miércoles</option>
+					<option value="jueves">Jueves</option>
+					<option value="viernes">Viernes</option>
+					<option value="sabado">Sábado</option>
+					<option value="domingo">Domingo</option>
+				</select>
+			</td>
+			
+		</tr>
+
+		<tr>
+			<td>
+				Hora de Entrega
+			</td>
+
+			<td colspan="2">
+				<select name="hora" class="form-control">
+					<option value="Sin Seleccionar" selected="">- SELECCIONE HORA -</option>
+							<option value="Hora-Man" disabled="disabled">Horario de Mañana</option>
+							<option value="09:30 y 10:00">Entre 09:30 y 10:00 hs</option>
+							<option value="10:00 y 10:30">Entre 10:00 y 10:30 hs</option>
+							<option value="10:30 y 11:00">Entre 10:30 y 11:00 hs</option>
+							<option value="11:00 y 11:30">Entre 11:00 y 11:30 hs</option>
+							<option value="11:30 y 12:00">Entre 11:30 y 12:00 hs</option>
+							<option value="12:00 y 12:30">Entre 12:00 y 12:30 hs</option>
+							<option value="12:30 y 13:00">Entre 12:30 y 13:00 hs</option>
+							<option value="13:00 y 13:30">Entre 13:00 y 13:30 hs</option>
+							
+							<option value="Hora-Tarde" disabled="disabled">Horario de Tarde</option>
+							<option value="18:00 y 18:30">Entre 18:00 y 18:30 hs</option>
+							<option value="18:30 y 19:00">Entre 18:30 y 19:00 hs</option>
+							<option value="19:00 y 19:30">Entre 19:00 y 19:30 hs</option>
+							<option value="19:30 y 20:00">Entre 19:30 y 20:00 hs</option>
+							<option value="20:00 y 20:30">Entre 20:00 y 20:30 hs</option>
+							<option value="20:30 y 21:00">Entre 20:30 y 21:00 hs</option>
+							<option value="21:00 y 21:30">Entre 21:00 y 21:30 hs</option>
+							<option value="21:30 y 22:00">Entre 21:30 y 22:00 hs</option>
+							<option value="22:00 y 22:30">Entre 22:00 y 22:30 hs</option>
+				</select>
+
+			</td>
 		</tr>
 		
 		@if(Auth::user()->dato->telefono1=='')

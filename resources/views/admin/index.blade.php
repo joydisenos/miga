@@ -25,41 +25,7 @@
 					<td>{{$productos}}</td>
 				</tr>
 
-				<form action="{{url('admin-panel/principal')}}" method="post">
-				<input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
-
-				<tr>
-					
-					<td>
-					Horario
-				</td>
-				<td>
-					<input type="time" name="apertura" placeholder="inicio" value="{{$principal->apertura}}" required>
-					<input type="time" name="cierre" placeholder="final" value="{{$principal->cierre}}" required>
-				</td>
-
-
-				</tr>
-
-				<tr>
-					<td>
-						Mensaje de Bienvenida
-					</td>
-
-					<td>
-						<textarea name="bienvenida" id="bienvenida" cols="30" rows="10" required>{{$principal->bienvenida}}</textarea>
-					</td>
-				</tr>
-
-				<tr>
-					<td>
-						
-					</td>
-					<td>
-						<button class="btn btn-outline-danger">Guardar</button>
-					</td>
-				</tr>
-				</form>
+				
 			</table>
 		</div>
 	</div>

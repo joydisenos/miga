@@ -13,7 +13,6 @@
         "laravel/tinker": "~1.0",
         "laraveles/spanish": "^1.0",
         "mercadopago/sdk": "0.5.2",
-        "nesbot/carbon": "^1.27",
         "todopago/php-sdk": "^1.10",
         "zephia/laravel-mercadolibre": "^0.1.1",
         "nesbot/carbon": "~1.14"

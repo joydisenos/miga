@@ -20,8 +20,8 @@ Route::get('/home', 'SiteController@index');
 Route::get('/compra/{id}','SiteController@show');
 Route::post('/comprar','SiteController@store')->middleware('auth');
 Route::get('/checkout', function (){
-
-  return view('checkout');
+  $datos = App\Principal::first();
+  return view('checkout',compact('datos'));
 })->middleware('auth');
 
 Route::post('checkout','UsuarioController@orden_store');
@@ -86,6 +86,8 @@ Route::prefix('admin-panel')->group(function(){
    Route::get('/categoria/eliminar/{id}','CategoriaController@delete');
    
    Route::post('/categoria/{id}','CategoriaController@update');
+
+   Route::get('/config','AdminController@config');
 
 
 });

@@ -21,6 +21,8 @@ class Cupones extends Migration
         Schema::create('cupones',function (Blueprint $table){
 
         $table->increments('id');
+
+        $table->string('nombre')->default('Cupon');
         
         $table->float('porcentaje');
         
