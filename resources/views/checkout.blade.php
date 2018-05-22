@@ -2,9 +2,7 @@
 
 @section('content')
 
-<?php
-$compras = Auth::user()->compra->where('ordene_id','=',0);
-?>
+
 
 
 <div class="container">
@@ -48,7 +46,7 @@ $compras = Auth::user()->compra->where('ordene_id','=',0);
                   
         @endforeach
 
-        @if($subtotal >= 600)
+        @if($subtotal >= $datos->monto)
         <tr>
         	<td></td>
         	<td>Subtotal</td>
@@ -56,13 +54,13 @@ $compras = Auth::user()->compra->where('ordene_id','=',0);
         </tr>
         <tr>
         	<td></td>
-        	<td>- 5% Descuento</td>
+        	<td>- {{$dato->porcentaje}}% Descuento</td>
         	<?php 
 
         	//Variables
-        	$porcentaje = 5;
+        	$porcentaje = $dato->porcentaje;
         	$descuento = ($subtotal * $porcentaje)/100;
-        	$envio = 0;
+        	$envio = $dato->envio;
 
 
         	$total = ($subtotal - $descuento) + $envio;        	

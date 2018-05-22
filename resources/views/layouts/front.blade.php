@@ -87,6 +87,8 @@
 
                 <a class="dropdown-item" href="{{url('usuario/compras')}}">Mis Compras</a>
 
+                <a class="dropdown-item" href="{{url('usuario/canje')}}">Canje de Puntos</a>
+
                 
 
                 

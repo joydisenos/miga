@@ -9,7 +9,13 @@ use App\Dato;
 use App\Mail\Orden as OrdenMail;
 use App\Compra;
 use App\Ordene;
+use App\Cuponesuser;
+use App\Premio;
+use App\Cupone;
 use App\Direccione;
+
+$mp = base_path("/vendor/mercadopago/sdk/lib/mercadopago.php");
+require_once $mp;
 
 class UsuarioController extends Controller
 {
@@ -40,6 +46,39 @@ class UsuarioController extends Controller
     public function direccion ()
     {
     	return view('user.direccion');
+    }
+
+    public function canje ()
+    {
+
+        $puntos= Auth::user()->dato->puntos;
+        $premios = Premio::where('estatus','=','1')->where('puntos', '<=' , $puntos)->get();
+        $cupones = Cupone::where('estatus','=','1')->where('puntos', '<=' , $puntos)->get();
+
+        return view('user.canje',compact('premios','cupones'));
+    }
+
+    public function canjear_cupon($id)
+    {
+        $puntos = Auth::user()->dato;
+        $cupon= Cupone::findOrFail($id);
+
+
+        if($puntos->puntos >= $cupon->puntos)
+        {
+            $puntos->puntos = $puntos->puntos - $cupon->puntos;
+            $puntos->save();
+
+            $cuponesuser = new Cuponesuser();
+            $cuponesuser->user_id = Auth::user()->id;
+            $cuponesuser->cupone_id = $id;
+            $cuponesuser->save();
+
+            return redirect ('usuario/canje')->with('status','Cupón Obtenido!');
+
+        }
+
+        return redirect()->back()->with('status','Cupón Canjeado!');
     }
 
 	public function direccion_agregar (Request $request)

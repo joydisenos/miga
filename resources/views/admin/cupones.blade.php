@@ -19,6 +19,8 @@
 						<th>Nombre</th>
 						
 						<th>Puntos</th>
+
+						<th>Porcentaje</th>
 						
 						<th>Visibilidad</th>
 						<th></th>
@@ -30,19 +32,23 @@
 						@foreach($cupones as $cupon)
 						<tr>
 
-						
+						<td>
+							{{$cupon->nombre}}
+						</td>
+
+						<td>
+							{{$cupon->puntos}}
+						</td>
+
 						<td>
 							{{$cupon->porcentaje}}
 						</td>
 						
 						<td>
-							{{$cupon->puntos}}
-						</td>
-						<td>
 							@if($cupon->estatus==1)
-							<a class="btn btn-success" href="{{url('admin-panel/activarp').'/'.$cupon->id.'/2'}}">Activo</a>
+							<a class="btn btn-success" href="{{url('admin-panel/activarc').'/'.$cupon->id.'/2'}}">Activo</a>
 							@elseif($cupon->estatus==2)
-							<a class="btn btn-danger" href="{{url('admin-panel/activarp').'/'.$cupon->id.'/1'}}">Oculto</a>
+							<a class="btn btn-danger" href="{{url('admin-panel/activarc').'/'.$cupon->id.'/1'}}">Oculto</a>
 							@endif
 						</td>
 						

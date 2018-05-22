@@ -14,6 +14,6 @@ class Cuponesuser extends Model
     }
     public function cupon()
     {
-    	return $this->belongsTo(Cupone::class);
+    	return $this->belongsTo(Cupone::class, 'cupone_id');
     }
 }

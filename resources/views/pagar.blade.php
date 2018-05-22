@@ -4,14 +4,7 @@
 
 <?php
 
-$mp = base_path("/vendor/mercadopago/sdk/lib/mercadopago.php");
-  
-require_once $mp;
-
 $mp = new MP("1787728543868124", "6nXoG9IfPRwUL4BXWW2IDkweUSH40Hn6");
-
-
-
 
 $preference_data = array(
     
@@ -23,12 +16,12 @@ $preference_data = array(
             "currency_id" => "ARS",
             "category_id" => "Alimentos",
             "quantity" => Auth::user()->compra->where('ordene_id','=',0)->count(),
-            "unit_price" => floatval($orden->total)
+            "unit_price" => (float)$orden->total
         )
     ),
 
   "back_urls" => array(
-            "success" => url('pago').'/'.$orden->id.'/'.'mercadopago',
+            "success" => url('pago'.'/'.$orden->id.'/'.'mercadopago'),
             "failure" => url('pago/fail'),
             "pending" => url('pago/pendiente')
         )
@@ -58,6 +51,8 @@ $preference = $mp->create_preference($preference_data);
           <thead>
             <th><a href="{{url('pago').'/'.$orden->id.'/'.'efectivo'}}" class="btn btn-outline-danger">Efectivo</a></th>
             <th><a href="<?php echo $preference["response"]["init_point"]; ?>" name="MP-Checkout" class="orange-ar-m-sq-arall">Tarjeta de Crédito Online Mercadopago</a>
+
+            <a href="<?php echo $preference['response']['sandbox_init_point']; ?>">Pay</a>
         <script type="text/javascript" src="//resources.mlstatic.com/mptools/render.js"></script></th>
             <th><a href="{{url('pago').'/'.$orden->id.'/'.'tarjetaAlDelivery'}}" class="btn btn-outline-danger">Tarjeta de Crédito al Delivery</a></th>
             

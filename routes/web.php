@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Support\Facades\Auth;
+
 
 Route::get('/', 'SiteController@index');
 Route::get('/filtro/{categoria}', 'SiteController@filtro');
@@ -20,8 +22,12 @@ Route::get('/home', 'SiteController@index');
 Route::get('/compra/{id}','SiteController@show');
 Route::post('/comprar','SiteController@store')->middleware('auth');
 Route::get('/checkout', function (){
+
+
+  $compras = Auth::user()->compra->where('ordene_id','=',0);
   $datos = App\Principal::first();
-  return view('checkout',compact('datos'));
+  return view('checkout',compact('datos', 'compras'));
+
 })->middleware('auth');
 
 Route::post('checkout','UsuarioController@orden_store');
@@ -32,7 +38,7 @@ Route::get('/pago/pendiente', 'UsuarioController@pendiente');
 
 //User
 
-Route::prefix('usuario')->group(function(){
+Route::prefix('usuario')->middleware('auth')->group(function(){
 
   Route::get('/','UsuarioController@index');
   Route::get('/direccion','UsuarioController@direccion');
@@ -42,6 +48,8 @@ Route::prefix('usuario')->group(function(){
   Route::get('direccion/borrar/{id}','UsuarioController@direccion_borrar');
   Route::get('compra/borrar/{id}','UsuarioController@compra_borrar');
   Route::get('compras','UsuarioController@compras');
+  Route::get('canje','UsuarioController@canje');
+  Route::get('/cupon/{id}','UsuarioController@canjear_cupon');
   
 });
 
@@ -66,6 +74,9 @@ Route::prefix('admin-panel')->group(function(){
    Route::get('/premio/{id}','AdminController@premio_editar');
    Route::post('/premio/{id}','AdminController@premio_actualizar');
 
+
+//Cupones
+
    Route::get('/cupon', function(){
     return view('admin.cupon');
    });
@@ -73,6 +84,9 @@ Route::prefix('admin-panel')->group(function(){
    Route::get('/cupones','AdminController@cupon_index');
    Route::get('/cupon/{id}','AdminController@cupon_editar');
    Route::post('/cupon/{id}','AdminController@cupon_actualizar');
+   Route::get('/activarc/{id}/{estatus}','AdminController@cupon_activar');
+
+
    Route::get('entregar/{id}/{estatus}','AdminController@entregar');
    
    Route::post('categoria','CategoriaController@store');

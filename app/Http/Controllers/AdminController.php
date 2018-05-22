@@ -126,6 +126,14 @@ class AdminController extends Controller
         return view('admin.producto-edit',compact('producto','categorias'));
     }
 
+    public function cupon_editar($id)
+    {
+        $cupon = Cupone::findOrFail($id);
+       
+
+        return view('admin.cupon-edit',compact('cupon'));
+    }
+
     public function producto_actualizar($id, Request $request)
     {
         $this->validate($request, [
@@ -170,6 +178,39 @@ class AdminController extends Controller
         $producto->save();
 
         return redirect('admin-panel/productos');
+    }
+
+    public function cupon_activar($id, $estatus)
+    {
+        $cupon = Cupone::findOrFail($id);
+        $cupon->estatus = $estatus;
+        $cupon->save();
+
+        return redirect('admin-panel/cupones');
+    }
+
+    public function cupon_actualizar ($id, Request $request)
+    {
+
+
+        $this->validate($request, [
+        'nombre' => 'required',
+        'puntos' => 'required',
+        'porcentaje' => 'required',
+    ]);
+
+        $cupon = Cupone::findOrFail($id);
+
+        $cupon->nombre = $request->nombre;
+
+        $cupon->porcentaje = $request->porcentaje;
+
+        $cupon->puntos = $request->puntos;
+
+        $cupon->save();
+
+        return redirect('admin-panel/cupones')->with('status','Cupón Actualizado con Éxito!');
+
     }
 
     public function producto_store(Request $request)
