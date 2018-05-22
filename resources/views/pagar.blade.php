@@ -52,7 +52,6 @@ $preference = $mp->create_preference($preference_data);
             <th><a href="{{url('pago').'/'.$orden->id.'/'.'efectivo'}}" class="btn btn-outline-danger">Efectivo</a></th>
             <th><a href="<?php echo $preference["response"]["init_point"]; ?>" name="MP-Checkout" class="orange-ar-m-sq-arall">Tarjeta de Crédito Online Mercadopago</a>
 
-            <a href="<?php echo $preference['response']['sandbox_init_point']; ?>">Pay</a>
         <script type="text/javascript" src="//resources.mlstatic.com/mptools/render.js"></script></th>
             <th><a href="{{url('pago').'/'.$orden->id.'/'.'tarjetaAlDelivery'}}" class="btn btn-outline-danger">Tarjeta de Crédito al Delivery</a></th>
             
