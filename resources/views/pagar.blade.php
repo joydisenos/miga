@@ -67,6 +67,11 @@ $preference = $mp->create_preference($preference_data);
 
         @endforeach
 
+        <tr>
+          <td></td>
+          <td>Envío</td>
+          <td>{{$datos->envio}}</td>
+        </tr>
 
         <tr>
          

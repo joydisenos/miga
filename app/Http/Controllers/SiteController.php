@@ -41,4 +41,9 @@ class SiteController extends Controller
     	$compra->save();
     	return redirect('/checkout')->with('status','Producto agregado al carrito exitosamente!');
     }
+
+    public function cupon ($id)
+    {
+        
+    }
 }

@@ -21,6 +21,7 @@ Auth::routes();
 Route::get('/home', 'SiteController@index');
 Route::get('/compra/{id}','SiteController@show');
 Route::post('/comprar','SiteController@store')->middleware('auth');
+Route::get('/checkout/c/{id}','UsuarioController@cupon_select')->middleware('auth');
 Route::get('/checkout', function (){
 
 
@@ -31,7 +32,7 @@ Route::get('/checkout', function (){
 
 })->middleware('auth');
 
-Route::post('checkout','UsuarioController@orden_store');
+Route::post('checkout','UsuarioController@orden_store')->middleware('auth');
 
 Route::get('/pago/{id}/{tipo}', 'UsuarioController@definir_pago');
 Route::get('/pago/fail', 'UsuarioController@fail');

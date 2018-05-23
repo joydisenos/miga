@@ -15,58 +15,6 @@
 	<h3>Productos</h3>
 <div class="text-right">
 	
-	@if(count(Auth::user()->cupon->where('estatus','=','1')))
-	<a href="{{url('/')}}" class="btn btn-outline-danger" data-toggle="modal" data-target="#cupones">Cupón de Descuento</a>
-	<!--Modal-->
-
-	<div class="modal fade" id="cupones" tabindex="-1" role="dialog" aria-labelledby="cuponesTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Cupones de Descuento</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <table class="table table-hover">
-          <thead>
-            <th>Cupón</th>
-            <th>Descuento</th>
-            <th>Seleccionar</th>
-          </thead>
-       <tbody>
-
-        
-        @foreach(Auth::user()->cupon->where('estatus','=','1') as $cupon)
-
-        <tr>
-          <td>{{$cupon->cupon->nombre}}</td>
-          <td>{{$cupon->cupon->porcentaje}}%</td>
-          
-          <td><a href="{{url('checkout/c').'/'.$cupon->id}}" class="btn btn-outline-danger">Seleccionar</a></td>
-        </tr>
-       
-          
-
-      
-                  
-        @endforeach
-
-        
-      </tbody>
-        </table>
-                  
-      </div>
-      <div class="modal-footer">
-        <a href="#" class="btn btn-outline-danger" data-dismiss="modal" aria-label="Close">Cerrar</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-	<!--/Modal-->
-	@endif
 	<a href="{{url('/')}}" class="btn btn-outline-danger">Seguir Comprando</a>
 </div>
 
@@ -98,7 +46,7 @@
                   
         @endforeach
 
-        @if($subtotal >= $datos->monto)
+        
         <tr>
         	<td></td>
         	<td>Subtotal</td>
@@ -106,12 +54,12 @@
         </tr>
         
         <tr>
-        	<td></td>
-        	<td>- {{$datos->descuento}}% Descuento</td>
+        	<td>{{$cupon->cupon->nombre}}</td>
+        	<td>- {{$cupon->cupon->porcentaje}}% Descuento</td>
         	
         	<?php 
         	//Variables
-        	$porcentaje = $datos->descuento;
+        	$porcentaje = $cupon->cupon->porcentaje;
         	$descuento = round(($subtotal * $porcentaje)/100 , 2);
         	$envio = $datos->envio;
         	$total = ($subtotal - $descuento) + $envio;        	
@@ -137,30 +85,7 @@
         
 
         
-        @else
-
-        <?php 
-
-        //Variables
-        $envio = $datos->envio; 
-        $total = $subtotal + $envio; 
-        ?>
-
         
-        <tr>
-        	<td></td>
-        	<td>Envío</td>
-        	<td>${{$envio}}</td>
-        </tr>
-
-        <tr>
-          <td></td>
-          <td><strong>Total</strong></td>
-          <td><strong>${{$total}}</strong></td>
-          <td></td>
-        </tr>
-
-        @endif
       </tbody>
         </table>
 
@@ -179,7 +104,7 @@
 	<table class="table table-hover">
 		<form action="{{url('checkout')}}" method="post">
 			<input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
-			<input type = 'hidden' name = 'descuento' value = '0'>
+			<input type = 'hidden' name = 'descuento' value = '{{$cupon->id}}'>
 			<input type = 'hidden' name = 'total' id="formtotal" value = '{{$total}}'>
 		@foreach(Auth::user()->direccion as $direccion)
 		<tr>

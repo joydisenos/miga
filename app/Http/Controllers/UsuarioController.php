@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Dato;
 use App\Mail\Orden as OrdenMail;
 use App\Compra;
+use App\Principal;
 use App\Ordene;
 use App\Cuponesuser;
 use App\Premio;
@@ -56,6 +57,14 @@ class UsuarioController extends Controller
         $cupones = Cupone::where('estatus','=','1')->where('puntos', '<=' , $puntos)->get();
 
         return view('user.canje',compact('premios','cupones'));
+    }
+
+    public function cupon_select($id)
+    {
+        $cupon = Cuponesuser::findOrFail($id);
+        $compras = Auth::user()->compra->where('ordene_id','=',0);
+        $datos = Principal::first();
+        return view('checkoutcupon',compact('cupon','compras','datos'));
     }
 
     public function canjear_cupon($id)
@@ -225,11 +234,20 @@ class UsuarioController extends Controller
     {
 
 
+
         $this->validate($request, [
         'direccion' => 'required',
         ]);
 
-        
+        if($request->descuento != 0)
+        {
+            $cupon = Cuponesuser::findOrFail($request->descuento);
+            $cupon->estatus = 2;
+            $cupon->save();
+        }
+
+        $datos = Principal::first();
+
         $orden = new Ordene();
 
         $orden->user_id = Auth::user()->id;
@@ -253,7 +271,7 @@ class UsuarioController extends Controller
         
 
 
-        return view('pagar',compact('orden'));
+        return view('pagar',compact('orden','datos'));
 
 
     }
@@ -265,8 +283,10 @@ class UsuarioController extends Controller
         return view ('user.compras',compact('compras'));
     }
 
-    public function definir_pago( $id, $tipo )
+    public function definir_pago( $id, $tipo)
     {
+
+
 
         if($tipo == 'mercadopago')
         {

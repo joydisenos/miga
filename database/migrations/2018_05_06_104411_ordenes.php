@@ -33,6 +33,8 @@ class Ordenes extends Migration
         $table->string('entrega');
 
         $table->string('pago');
+
+        $table->integer('descuento')->default(0);
         
         /**
          * Foreignkeys section
