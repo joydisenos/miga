@@ -54,29 +54,22 @@
         </tr>
         <tr>
         	<td></td>
-        	<td>- {{$dato->porcentaje}}% Descuento</td>
+        	<td>- {{$datos->descuento}}% Descuento</td>
         	<?php 
 
         	//Variables
-        	$porcentaje = $dato->porcentaje;
-        	$descuento = ($subtotal * $porcentaje)/100;
-        	$envio = $dato->envio;
+        	$porcentaje = $datos->descuento;
+        	$descuento = round(($subtotal * $porcentaje)/100 , 2);
+        	$envio = $datos->envio;
+
+
 
 
         	$total = ($subtotal - $descuento) + $envio;        	
         	?>
-        	<td>${{$total}}</td>
+        	<td>${{$descuento}}</td>
         </tr>
-        @else
 
-        <?php 
-
-        //Variables
-        $envio = 0; 
-        $total = $subtotal + $envio; 
-        ?>
-
-        @endif
         <tr>
         	<td></td>
         	<td>Envío</td>
@@ -89,6 +82,30 @@
           <td><strong>${{$total}}</strong></td>
           <td></td>
         </tr>
+        @else
+
+        <?php 
+
+        //Variables
+        $envio = $datos->envio; 
+        $total = $subtotal + $envio; 
+        ?>
+
+        
+        <tr>
+        	<td></td>
+        	<td>Envío</td>
+        	<td>${{$envio}}</td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td><strong>Total</strong></td>
+          <td><strong>${{$total}}</strong></td>
+          <td></td>
+        </tr>
+
+        @endif
       </tbody>
         </table>
 
@@ -130,6 +147,7 @@
 			<td colspan="2">
 
 				<select name="dia" class="form-control">
+					<option value="">Días de Entrega</option>
 					<option value="lunes">Lunes</option>
 					<option value="martes">Martes</option>
 					<option value="miercoles">Miércoles</option>

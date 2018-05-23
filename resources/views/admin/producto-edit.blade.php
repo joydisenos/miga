@@ -48,7 +48,7 @@
 
 		<div class="form-group">
 			<label for="precio" class="form-control">Precio</label>
-			<input type="number" value="{{$producto->precio}}" id="precio" class="form-control" name="precio" required>
+			<input type="number" step="0.01" value="{{$producto->precio}}" id="precio" class="form-control" name="precio" required>
 		</div>
 
 		<div class="form-group">

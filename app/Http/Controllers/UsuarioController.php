@@ -76,9 +76,33 @@ class UsuarioController extends Controller
 
             return redirect ('usuario/canje')->with('status','Cupón Obtenido!');
 
+        }else{
+        
+            return redirect()->back()->with('status','Hubo un error por favor intente nuevamente!');
+        }
+    }
+
+    public function canjear_premio($id)
+    {
+        $puntos = Auth::user()->dato;
+        $premio= Premio::findOrFail($id); 
+        if($puntos->puntos >= $premio->puntos)
+        {
+            $puntos->puntos = $puntos->puntos - $premio->puntos;
+            $puntos->save();
+
+            $premiosuser = new Userpremio();
+            $premiosuser->user_id = Auth::user()->id;
+            $premiosuser->premio_id = $id;
+            $premiosuser->save();
+
+            return redirect ('usuario/canje')->with('status','Premio Obtenido! estamos procesando su solicitud para hacerle llegar su pedido');
+
+        }else{
+        
+            return redirect()->back()->with('status','Hubo un error por favor intente nuevamente!');
         }
 
-        return redirect()->back()->with('status','Cupón Canjeado!');
     }
 
 	public function direccion_agregar (Request $request)

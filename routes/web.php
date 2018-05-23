@@ -26,6 +26,7 @@ Route::get('/checkout', function (){
 
   $compras = Auth::user()->compra->where('ordene_id','=',0);
   $datos = App\Principal::first();
+
   return view('checkout',compact('datos', 'compras'));
 
 })->middleware('auth');

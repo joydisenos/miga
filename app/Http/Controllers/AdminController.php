@@ -139,7 +139,7 @@ class AdminController extends Controller
         $this->validate($request, [
         'foto' => 'image|unique:productos',
         'nombre' => 'required',
-        'categoria' => 'required',
+        'categoria_id' => 'required',
         'descripcion' => 'required',
         'precio' => 'required',
         'cantidades' => 'required',
@@ -290,7 +290,7 @@ class AdminController extends Controller
 
         $premio->save();
 
-        return redirect('admin-panel/productos');
+        return redirect('admin-panel/premios')->with('status','Premio agregado con éxito');
 
 
     }

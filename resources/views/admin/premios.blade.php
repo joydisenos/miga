@@ -11,7 +11,7 @@
 			
 		</div>
 		<div class="col-md-9 formulario">
-			<h3>Productos</h3>
+			<h3>Premios</h3>
 			<table class="table table-hover">
 				<thead>
 				
