@@ -67,11 +67,13 @@ $preference = $mp->create_preference($preference_data);
 
         @endforeach
 
+
         <tr>
          
+         <td></td>
           <td><strong>Total</strong></td>
           <td><strong>${{$orden->total}}</strong></td>
-          <td></td>
+          
 
         </tr>
       </tbody>

@@ -268,23 +268,43 @@ class UsuarioController extends Controller
     public function definir_pago( $id, $tipo )
     {
 
-        
-
-        $user_id=Auth::user()->id;
-        
-        $orden = Ordene::findOrFail($id);
-        $orden->pago = $tipo;
-        $orden->estatus = 1;
-        $orden->save();
-
-        $productos = Compra::where('ordene_id','=','0')->where('user_id','=', $user_id)->get();
-
-        foreach ($productos as $producto)
+        if($tipo == 'mercadopago')
         {
-            $producto->ordene_id = $id;
-            $producto->save();
-        }
 
+            
+
+            $user_id=Auth::user()->id;
+        
+            $orden = Ordene::findOrFail($id);
+            $orden->pago = $tipo;
+            $orden->estatus = 1;
+            $orden->save();
+
+            $productos = Compra::where('ordene_id','=','0')->where('user_id','=', $user_id)->get();
+
+            foreach ($productos as $producto)
+            {
+                $producto->ordene_id = $id;
+                $producto->save();
+            }
+
+        }else{
+        
+            $user_id=Auth::user()->id;
+                
+            $orden = Ordene::findOrFail($id);
+            $orden->pago = $tipo;
+            $orden->estatus = 1;
+            $orden->save();
+
+            $productos = Compra::where('ordene_id','=','0')->where('user_id','=', $user_id)->get();
+
+            foreach ($productos as $producto)
+            {
+                $producto->ordene_id = $id;
+                $producto->save();
+            }
+        }
         // $puntos = Auth::user()->dato;
 
         // $puntos->puntos = $puntos->puntos + (($orden->total)/2);
