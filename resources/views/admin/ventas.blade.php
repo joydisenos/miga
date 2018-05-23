@@ -73,6 +73,7 @@
        	<li><strong>Email:</strong> {{$venta->user->email}}</li>
        	<li><strong>Teléfono 1:</strong> {{$venta->user->dato->telefono1}}</li>
        	<li><strong>Teléfono 2:</strong> {{$venta->user->dato->telefono2}}</li>
+       	<li><strong>Fecha de Nacimiento:</strong> {{$venta->user->dato->nacimiento}}</li>
        	<li><strong>Fecha:</strong> {{$venta->created_at->format('d/m/y H:i')}}</li>
        	<li><strong>Dirección:</strong> {{$venta->direccion->direccion}}</li>
        	<li><strong>Día Solicitado:</strong> {{$venta->entrega}}</li>

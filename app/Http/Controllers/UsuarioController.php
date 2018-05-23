@@ -283,33 +283,54 @@ class UsuarioController extends Controller
         return view ('user.compras',compact('compras'));
     }
 
-    public function definir_pago( $id, $tipo)
+    public function mercadopago($id,$tipo, Request $request)
     {
+        $mp = new MP("1787728543868124", "6nXoG9IfPRwUL4BXWW2IDkweUSH40Hn6");
+            $params = ["access_token" => $mp->get_access_token()];
 
-
-
-        if($tipo == 'mercadopago')
-        {
-
-            
-
-            $user_id=Auth::user()->id;
-        
-            $orden = Ordene::findOrFail($id);
-            $orden->pago = $tipo;
-            $orden->estatus = 1;
-            $orden->save();
-
-            $productos = Compra::where('ordene_id','=','0')->where('user_id','=', $user_id)->get();
-
-            foreach ($productos as $producto)
-            {
-                $producto->ordene_id = $id;
-                $producto->save();
+            if($_GET["topic"] == 'payment'){
+                $payment_info = $mp->get("/collections/notifications/" . $_GET["id"], $params, false);
+                $merchant_order_info = $mp->get("/merchant_orders/" . $payment_info["response"]["collection"]["merchant_order_id"], $params, false);
+            // Get the merchant_order reported by the IPN. Glossary of attributes response in https://developers.mercadopago.com    
+            }else if($_GET["topic"] == 'merchant_order'){
+                $merchant_order_info = $mp->get("/merchant_orders/" . $_GET["id"], $params, false);
             }
 
-        }else{
+            //If the payment's transaction amount is equal (or bigger) than the merchant order's amount you can release your items 
+            if ($merchant_order_info["status"] == 200) {
+                $transaction_amount_payments= 0;
+                $transaction_amount_order = $merchant_order_info["response"]["total_amount"];
+                $payments=$merchant_order_info["response"]["payments"];
+                foreach ($payments as  $payment) {
+                    if($payment['status'] == 'approved'){
+                        $transaction_amount_payments += $payment['transaction_amount'];
+                    }   
+                }
+               
+                    $user_id=Auth::user()->id;
         
+                        $orden = Ordene::findOrFail($id);
+                        $orden->pago = $tipo;
+                        $orden->estatus = 1;
+                        $orden->save();
+
+                        $productos = Compra::where('ordene_id','=','0')->where('user_id','=', $user_id)->get();
+
+                        foreach ($productos as $producto)
+                        {
+                            $producto->ordene_id = $id;
+                            $producto->save();
+                        }
+                        return redirect('usuario')->with('status','su compra esta siendo procesada, en breve tramitaremos su solicitud');
+                }
+                else{
+                        return redirect('usuario')->with('status','Hubo un error durante la operación, por favor intente de nuevo!'); 
+                }
+    }
+
+    public function definir_pago ($id, $tipo)
+    {
+
             $user_id=Auth::user()->id;
                 
             $orden = Ordene::findOrFail($id);
@@ -324,7 +345,7 @@ class UsuarioController extends Controller
                 $producto->ordene_id = $id;
                 $producto->save();
             }
-        }
+        
         // $puntos = Auth::user()->dato;
 
         // $puntos->puntos = $puntos->puntos + (($orden->total)/2);

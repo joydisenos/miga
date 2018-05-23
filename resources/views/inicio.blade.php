@@ -107,7 +107,7 @@
   )
 
   <div class="bg-success text-center text-white">
-     {{$hora->format('l')}} {{$hora->format('H:i')}}
+    
       <p><span class="text-yellow">Sondemiga.com - <strong>ABIERTO</strong></span>
       <br>
       También puede consultar al 02281 318667 (whatsapp disponible)

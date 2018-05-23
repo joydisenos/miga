@@ -48,14 +48,7 @@ $preference = $mp->create_preference($preference_data);
 	<h3>Elegir Método de Pago</h3>
 
 	<table class="table table-hover">
-          <thead>
-            <th><a href="{{url('pago').'/'.$orden->id.'/'.'efectivo'}}" class="btn btn-outline-danger">Efectivo</a></th>
-            <th><a href="<?php echo $preference["response"]["init_point"]; ?>" name="MP-Checkout" class="orange-ar-m-sq-arall">Tarjeta de Crédito Online Mercadopago</a>
-
-        <script type="text/javascript" src="//resources.mlstatic.com/mptools/render.js"></script></th>
-            <th><a href="{{url('pago').'/'.$orden->id.'/'.'tarjetaAlDelivery'}}" class="btn btn-outline-danger">Tarjeta de Crédito al Delivery</a></th>
-            
-          </thead>
+          
        <tbody>
 
         @foreach(Auth::user()->compra->where('ordene_id','=',0) as $compra)
@@ -81,6 +74,41 @@ $preference = $mp->create_preference($preference_data);
           
 
         </tr>
+        <tr>
+        <td colspan="3"><a href="{{url('pago').'/'.$orden->id.'/'.'efectivo'}}">Efectivo</a>
+       
+        <img src="{{asset('/storage/cash.png')}}" width="30px" alt="">
+        </td>
+        
+        </tr>
+        
+        <tr>
+        <td colspan="3"><a href="<?php echo $preference["response"]["init_point"]; ?>" name="MP-Checkout">Tarjeta de Crédito Online Mercadopago</a><br>
+        <img src="{{asset('/storage/p1.png')}}" alt="" width="30px">
+        <img src="{{asset('/storage/p2.png')}}" alt="" width="30px">
+        <img src="{{asset('/storage/p3.png')}}" alt="" width="30px">
+        <img src="{{asset('/storage/p4.png')}}" alt="" width="30px">
+        <img src="{{asset('/storage/p5.png')}}" alt="" width="30px">
+        <img src="{{asset('/storage/p7.png')}}" alt="" width="30px">
+        <img src="{{asset('/storage/p8.png')}}" alt="" width="30px">
+
+        <script type="text/javascript" src="//resources.mlstatic.com/mptools/render.js"></script></td>
+        </tr>
+        
+        <tr>
+        <td colspan="3"><a href="{{url('pago').'/'.$orden->id.'/'.'tarjetaAlDelivery'}}">Tarjeta de Crédito al Delivery</a><br>
+
+        <img src="{{asset('/storage/p2.png')}}" alt="" width="30px">
+        <img src="{{asset('/storage/p3.png')}}" alt="" width="30px">
+        <img src="{{asset('/storage/p4.png')}}" alt="" width="30px">
+        <img src="{{asset('/storage/p5.png')}}" alt="" width="30px">
+        <img src="{{asset('/storage/p7.png')}}" alt="" width="30px">
+        </td>
+        </tr>
+
+            
+            
+          
       </tbody>
         </table>
 
