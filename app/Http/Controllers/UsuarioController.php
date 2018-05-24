@@ -283,6 +283,57 @@ class UsuarioController extends Controller
         return view ('user.compras',compact('compras'));
     }
 
+    public function fail( $id , Request $request)
+    {
+            return redirect('usuario')->with('status','Hubo un error durante el pago por favor intente nuevamente');
+    }
+
+    public function pendiente( $id , Request $request)
+    {
+
+        
+
+        $user_id=Auth::user()->id;
+        
+                        $orden = Ordene::findOrFail($id);
+                        $orden->pago = 'mercadopago N°'.$request->id;
+                        $orden->estatus = 3;
+                        $orden->save();
+
+                        $productos = Compra::where('ordene_id','=','0')->where('user_id','=', $user_id)->get();
+
+                        foreach ($productos as $producto)
+                        {
+                            $producto->ordene_id = $id;
+                            $producto->save();
+                        }
+
+        return redirect('usuario')->with('status','Su pago esta en estatus pendiente, en breve verificaremos su transacción');
+    }
+
+    public function success( $id , Request $request)
+    {
+
+        
+
+        $user_id=Auth::user()->id;
+        
+                        $orden = Ordene::findOrFail($id);
+                        $orden->pago = 'mercadopago N°'.$request->id;
+                        $orden->estatus = 1;
+                        $orden->save();
+
+                        $productos = Compra::where('ordene_id','=','0')->where('user_id','=', $user_id)->get();
+
+                        foreach ($productos as $producto)
+                        {
+                            $producto->ordene_id = $id;
+                            $producto->save();
+                        }
+
+        return redirect('usuario')->with('status','Fué Exitoso en breves nos pondremos en contacto para realizar su envío!');
+    }
+
     public function mercadopago($id,$tipo, Request $request)
     {
         $mp = new MP("1787728543868124", "6nXoG9IfPRwUL4BXWW2IDkweUSH40Hn6");

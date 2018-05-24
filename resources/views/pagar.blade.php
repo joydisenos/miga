@@ -21,9 +21,9 @@ $preference_data = array(
     ),
 
   "back_urls" => array(
-            "success" => url('pago'.'/'.$orden->id.'/'.'mercadopago'),
-            "failure" => url('pago/fail'),
-            "pending" => url('pago/pendiente')
+            "success" => url('pagos'.'/'.$orden->id.'/'.'mercadopago'),
+            "failure" => url('pagos'.'/'.$orden->id.'/'.'fail'),
+            "pending" => url('pagos'.'/'.$orden->id.'/'.'pendiente')
         )
 
 
@@ -83,7 +83,7 @@ $preference = $mp->create_preference($preference_data);
         </tr>
         
         <tr>
-        <td colspan="3"><a href="<?php echo $preference["response"]["init_point"]; ?>" name="MP-Checkout">Tarjeta de Crédito Online Mercadopago</a><br>
+        <td colspan="3"><a href="<?php echo $preference["response"]["init_point"]; ?>" name="MP-Checkout" mp-mode="[modal]" onreturn="resultadoDePago">Tarjeta de Crédito Online Mercadopago</a><br>
         <img src="{{asset('/storage/p1.png')}}" alt="" width="30px">
         <img src="{{asset('/storage/p2.png')}}" alt="" width="30px">
         <img src="{{asset('/storage/p3.png')}}" alt="" width="30px">
@@ -92,7 +92,27 @@ $preference = $mp->create_preference($preference_data);
         <img src="{{asset('/storage/p7.png')}}" alt="" width="30px">
         <img src="{{asset('/storage/p8.png')}}" alt="" width="30px">
 
-        <script type="text/javascript" src="//resources.mlstatic.com/mptools/render.js"></script></td>
+
+
+        <script type="text/javascript" src="//resources.mlstatic.com/mptools/render.js"></script>
+
+        <script>
+          function execute_my_onreturn (json) {
+            if (json.collection_status=='approved'){
+                alert ('Pago acreditado');
+            } else if(json.collection_status=='pending'){
+                alert ('El usuario no completó el pago');
+            } else if(json.collection_status=='in_process'){    
+                alert ('El pago está siendo revisado');    
+            } else if(json.collection_status=='rejected'){
+                alert ('El pago fué rechazado, el usuario puede intentar nuevamente el pago');
+            } else if(json.collection_status==null){
+                alert ('El usuario no completó el proceso de pago, no se ha generado ningún pago');
+            }
+        }
+        </script>
+
+      </td>
         </tr>
         
         <tr>

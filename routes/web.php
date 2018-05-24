@@ -36,8 +36,9 @@ Route::post('checkout','UsuarioController@orden_store')->middleware('auth');
 
 Route::get('/pago/{id}/{tipo}', 'UsuarioController@definir_pago');
 Route::post('/pago/{id}/{tipo}', 'UsuarioController@mercadopago');
-Route::get('/pago/fail', 'UsuarioController@fail');
-Route::get('/pago/pendiente', 'UsuarioController@pendiente');
+Route::get('/pagos/{id}/fail', 'UsuarioController@fail');
+Route::get('/pagos/{id}/pendiente', 'UsuarioController@pendiente');
+Route::get('/pagos/{id}/mercadopago', 'UsuarioController@success');
 
 //User
 

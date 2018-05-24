@@ -126,7 +126,7 @@
 
 
   <div class="bg-danger text-center text-white">
-    {{$hora->format('l')}} {{$hora->format('H:i')}}
+    
       <p><span class="text-yellow">Sondemiga.com - <strong>CERRADO</strong></span>
       <br>
       Reservalos para después! - También puede consultar al 02281 318667 (whatsapp disponible)
