@@ -11,6 +11,7 @@ use App\Compra;
 use App\Principal;
 use App\Ordene;
 use App\Cuponesuser;
+use App\Userpremio;
 use App\Premio;
 use App\Cupone;
 use App\Direccione;
@@ -91,8 +92,16 @@ class UsuarioController extends Controller
         }
     }
 
-    public function canjear_premio($id)
+    
+
+    public function canjear_premio($id, Request $request)
     {
+
+           $this->validate($request, [
+        'direccion' => 'required',
+        ]);
+
+
         $puntos = Auth::user()->dato;
         $premio= Premio::findOrFail($id); 
         if($puntos->puntos >= $premio->puntos)
@@ -103,6 +112,7 @@ class UsuarioController extends Controller
             $premiosuser = new Userpremio();
             $premiosuser->user_id = Auth::user()->id;
             $premiosuser->premio_id = $id;
+            $premiosuser->direccione_id = $request->direccion;
             $premiosuser->save();
 
             return redirect ('usuario/canje')->with('status','Premio Obtenido! estamos procesando su solicitud para hacerle llegar su pedido');
@@ -151,7 +161,8 @@ class UsuarioController extends Controller
         " Piso ".$request->piso.
         " Departamento ".$request->departamento;
     	
-        $direccion->zip = $request->zip;
+        if ($direccion->zip)
+            {$direccion->zip = $request->zip;}
     	if($request->referencia)
         {$direccion->referencia = $request->referencia;}
         else

@@ -250,7 +250,7 @@
           Número
         </td>
         <td>
-          <input type="text" name="numero" class="form-control" required>
+          <input type="number" name="numero" class="form-control" required>
         </td>
       </tr>
       <tr>
@@ -274,7 +274,7 @@
           Código Postal
         </td>
         <td>
-          <input type="text" class="form-control" name="zip" placeholder="Su Código postal / Zip" required>
+          <input type="text" class="form-control" name="zip" placeholder="Su Código postal / Zip">
         </td>
       </tr>
       <tr>

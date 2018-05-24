@@ -54,6 +54,7 @@ Route::prefix('usuario')->middleware('auth')->group(function(){
   Route::get('compras','UsuarioController@compras');
   Route::get('canje','UsuarioController@canje');
   Route::get('/cupon/{id}','UsuarioController@canjear_cupon');
+  Route::post('/premio/{id}','UsuarioController@canjear_premio');
   
 });
 
@@ -70,6 +71,7 @@ Route::prefix('admin-panel')->group(function(){
   Route::get('/producto/{id}','AdminController@producto_editar');
   Route::post('/producto/{id}','AdminController@producto_actualizar');
    Route::get('/ventas','AdminController@ventas_index');
+   Route::get('/canje','AdminController@canje_index');
    Route::get('/premio', function(){
     return view('admin.premio');
    });

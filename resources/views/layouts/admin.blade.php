@@ -50,6 +50,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{{url('/admin-panel/ventas')}}">Ventas</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('/admin-panel/canje')}}">Canje</a>
+            </li>
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

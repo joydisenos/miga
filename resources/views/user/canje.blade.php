@@ -42,7 +42,7 @@
 		<h4>Cupones</h4>
 
 
-		@foreach($cupones->chunk(2) as $row)
+		@foreach($cupones->chunk(2) as $cupon)
 
            <div class="row">
              
@@ -78,25 +78,69 @@
 		<h4>Premios</h4>
 
 
-		@foreach($premios->chunk(2) as $row)
+		@foreach($premios as $premio)
 
            <div class="row">
              
 
-             @foreach($row as $premio)
-             <div class="col-md-6 formulario">
+            
+             <div class="col-md-12 formulario">
 
               <div class="card">
                 <img class="card-img-top" src="{{asset('storage/').'/'.$premio->foto}}" alt="{{$premio->nombre}}">
                 <div class="card-body">
                   <h6 class="card-title">{{title_case($premio->nombre)}}</h6>
-                  <p class="card-text">{{str_limit($premio->descripcion, 10)}}</p>
-                  <a href="{{url('cupon').'/'.$cupon->id}}" class="btn btn-outline-danger">Puntos {{$premio->puntos}}</a>
+                  <p class="card-text">{{$premio->descripcion}}</p>
+                  <div class="text-center">
+                    <a href="#" data-toggle="modal" data-target="#premio{{$premio->id}}" class="btn btn-outline-danger">Puntos {{$premio->puntos}}</a>
+                  </div>
                 </div>
               </div>
 
+              
+
+              <!-- Modal -->
+<div class="modal fade" id="premio{{$premio->id}}" tabindex="-1" role="dialog" aria-labelledby="premio{{$premio->id}}Title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{$premio->nombre}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <h5>Seleccione la dirección de entrega</h5>
+      <form action="{{url('usuario/premio').'/'.$premio->id}}" method="post">
+      <input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
+      <table class="table table-hover">
+        @foreach(Auth::user()->direccion as $direccion)
+          <tr>
+            <td>
+              <input type="radio" name="direccion" id="direccion{{$direccion->id}}" value="{{$direccion->id}}">
+            </td>
+            <td>
+              <label for="direccion{{$direccion->id}}">{{$direccion->direccion}}</label>
+            </td>
+            <td>
+              {{$direccion->zip}}
+            </td>
+          </tr>
+        @endforeach
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button href="#" type="submit"  class="btn btn-danger">Solicitar</button>
+
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
              </div>
-             @endforeach
+            
            </div>
 
 

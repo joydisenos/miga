@@ -24,7 +24,7 @@ class Direcciones extends Migration
         
         $table->biginteger('user_id');
         
-        $table->String('zip');
+        $table->String('zip')->deafult('no suministrado');
         
         $table->longText('direccion');
         

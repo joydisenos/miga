@@ -17,6 +17,7 @@
 					<th>Email</th>
 					<th>Teléfono 1</th>
 					<th>Teléfono 2</th>
+					<th>Fecha de Nacimiento</th>
 					<th>puntos</th>
 				</thead>
 
@@ -24,10 +25,11 @@
 					
 
 				<tr>
-					<td>{{$usuario->name}}</td>
+					<td>{{title_case($usuario->name)}}</td>
 					<td>{{$usuario->email}}</td>
 					<td>{{$usuario->dato->telefono1}}</td>
 					<td>{{$usuario->dato->telefono2}}</td>
+					<td>{{date('d/m/y' , strtotime($usuario->dato->nacimiento))}}</td>
 					<td>{{$usuario->dato->puntos}}</td>
 				</tr>
 

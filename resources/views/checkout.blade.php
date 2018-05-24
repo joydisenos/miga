@@ -184,10 +184,10 @@
 		@foreach(Auth::user()->direccion as $direccion)
 		<tr>
 			<td>
-				<input type="radio" name="direccion" value="{{$direccion->id}}">
+				<input type="radio" name="direccion" id="direccion" value="{{$direccion->id}}">
 			</td>
 			<td>
-				{{$direccion->direccion}}
+				<label for="direccion">{{$direccion->direccion}}</label>
 			</td>
 			<td>
 				{{$direccion->zip}}

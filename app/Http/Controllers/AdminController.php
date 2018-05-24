@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Producto;
+use App\Userpremio;
 use App\Premio;
 use App\Cupone;
 use App\Principal;
@@ -75,7 +76,15 @@ class AdminController extends Controller
         $productos = Producto::paginate(10);
 
         
-        return view('admin.productos', compact('productos','cantidades'));
+        return view('admin.productos', compact('productos'));
+    }
+
+    public function canje_index()
+    {
+        $canjes = Userpremio::paginate(10);
+
+        
+        return view('admin.canje', compact('canjes'));
     }
 
     public function cupon_index()

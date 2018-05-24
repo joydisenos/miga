@@ -20,6 +20,8 @@ class CreateUserpremiosTable extends Migration
 
             $table->integer('premio_id');
 
+            $table->integer('direccione_id');
+
             $table->integer('estatus')->default(1);
 
             $table->timestamps();

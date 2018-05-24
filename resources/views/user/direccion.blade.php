@@ -55,7 +55,7 @@
 					Código Postal
 				</td>
 				<td>
-					<input type="text" class="form-control" name="zip" placeholder="Su Código postal / Zip" required>
+					<input type="text" class="form-control" name="zip" placeholder="Su Código postal / Zip">
 				</td>
 			</tr>
 			<tr>

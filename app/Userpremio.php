@@ -16,4 +16,8 @@ class Userpremio extends Model
     {
     	return $this->belongsTo(Premio::class);
     }
+    public function direccion()
+    {
+    	return $this->belongsTo(Direccione::class);
+    }
 }
