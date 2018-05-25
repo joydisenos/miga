@@ -7,7 +7,9 @@
 
 <p>Usuario: {{$orden->user->name}}</p>
 <p>Teléfono: {{$orden->user->dato->telefono1}}</p>
-<p>Email: {{$orden->user->email}}</p>
+<p>Email: {{$orden->user->email}}</p> 
+<p>Dirección: {{$orden->direccion->direccion}} Código Postal: {{$orden->direccion->zip}} Referencia: {{$orden->direccion->referencia}}</p> 
+<p>Solicitado para: {{$orden->entrega}}</p> 
 
 <table style="width:100%; max-width: 600px; text-align: center;" class="table">
 	<thead>

@@ -12,12 +12,12 @@ class Userpremio extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function cupon()
+    public function premio()
     {
     	return $this->belongsTo(Premio::class);
     }
     public function direccion()
     {
-    	return $this->belongsTo(Direccione::class);
+    	return $this->belongsTo(Direccione::class,'direccione_id');
     }
 }

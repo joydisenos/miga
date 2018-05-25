@@ -87,6 +87,15 @@ class AdminController extends Controller
         return view('admin.canje', compact('canjes'));
     }
 
+    public function entregar_premio( $id , $estatus )
+    {
+        $premio = Userpremio::findOrFail($id);
+        $premio->estatus = $estatus;
+        $premio->save();
+
+        return redirect()->back()->with('status','Premio entregado');
+    }
+
     public function cupon_index()
     {
         $cupones = Cupone::paginate(10);

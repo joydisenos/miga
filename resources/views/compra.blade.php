@@ -14,7 +14,7 @@
 
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="index.html">Compra</a>
+          <a href="{{url('/')}}">Compra</a>
         </li>
         <li class="breadcrumb-item active">{{$producto->nombre}}</li>
       </ol>

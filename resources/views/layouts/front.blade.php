@@ -143,6 +143,32 @@
       @include('includes.errors')
       @include('includes.status')
        @yield('content') 
+
+      
+  
+@guest
+@else
+
+            @if (count(Auth::user()->compra->where('ordene_id','=',0)))
+          <a href="#" data-toggle="modal" data-target="#carrito" class="d-block d-lg-none">  
+            <div class="carrito-movil text-center align-middle">
+                
+                  
+                  
+              <div class="carrito-logo">
+                
+                             {{Auth::user()->compra->where('ordene_id','=',0)->count()}}
+
+                              <i class="fas fa-shopping-cart"></i>
+              </div>
+                  
+                
+              
+            </div>
+          </a>
+              @endif
+  @endguest
+
       </div>
     	
    

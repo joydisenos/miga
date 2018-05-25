@@ -61,7 +61,7 @@ Route::prefix('usuario')->middleware('auth')->group(function(){
 
 //Admin
 
-Route::prefix('admin-panel')->group(function(){
+Route::prefix('admin-panel')->middleware('auth')->group(function(){
   Route::get('/','AdminController@index');
   Route::get('/productos','AdminController@producto_index');
   Route::get('/producto','AdminController@producto_new');
@@ -79,6 +79,7 @@ Route::prefix('admin-panel')->group(function(){
    Route::get('/premios','AdminController@premio_index');
    Route::get('/premio/{id}','AdminController@premio_editar');
    Route::post('/premio/{id}','AdminController@premio_actualizar');
+   Route::get('/cambiar/{id}/{estatus}','AdminController@entregar_premio');
 
 
 //Cupones

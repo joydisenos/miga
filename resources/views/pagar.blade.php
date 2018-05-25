@@ -15,8 +15,8 @@ $preference_data = array(
             "title" => 'Orden '.$orden->id,
             "currency_id" => "ARS",
             "category_id" => "Alimentos",
-            "quantity" => Auth::user()->compra->where('ordene_id','=',0)->count(),
-            "unit_price" => (float)$orden->total
+            "quantity" => 1,
+            "unit_price" => $orden->total
         )
     ),
 

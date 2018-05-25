@@ -42,7 +42,7 @@
 		<h4>Cupones</h4>
 
 
-		@foreach($cupones->chunk(2) as $cupon)
+		@foreach($cupones->chunk(2) as $row)
 
            <div class="row">
              

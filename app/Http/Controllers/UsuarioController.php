@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Dato;
 use App\Mail\Orden as OrdenMail;
+use App\Mail\Premiosuser as PremiosuserMail;
 use App\Compra;
 use App\Principal;
 use App\Ordene;
@@ -115,6 +116,12 @@ class UsuarioController extends Controller
             $premiosuser->direccione_id = $request->direccion;
             $premiosuser->save();
 
+
+            Mail::to('pedidos@sondemiga.com','Sondemiga.com')
+
+                   ->send(new PremiosuserMail($premiosuser));
+
+
             return redirect ('usuario/canje')->with('status','Premio Obtenido! estamos procesando su solicitud para hacerle llegar su pedido');
 
         }else{
@@ -161,8 +168,11 @@ class UsuarioController extends Controller
         " Piso ".$request->piso.
         " Departamento ".$request->departamento;
     	
-        if ($direccion->zip)
-            {$direccion->zip = $request->zip;}
+        if (!$direccion->zip)
+            {
+                $direccion->zip = 0;
+            }else{
+                    $direccion->zip = $request->zip;}
     	if($request->referencia)
         {$direccion->referencia = $request->referencia;}
         else
