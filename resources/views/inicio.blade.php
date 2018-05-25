@@ -71,14 +71,14 @@
   ||
 
   $hora->format('l') >= 'Friday' && 
-  $hora->format('H:i') >= $principal->juevesa && 
-  $hora->hour <= $principal->juevesc
+  $hora->format('H:i') >= $principal->viernesa && 
+  $hora->hour <= $principal->viernesc
 
   ||
 
   $hora->format('l') >= 'Friday' && 
-  $hora->format('H:i') >= $principal->juevesat && 
-  $hora->hour <= $principal->juevesct
+  $hora->format('H:i') >= $principal->viernesat && 
+  $hora->hour <= $principal->viernesct
 
   ||
 
