@@ -11,18 +11,20 @@
 
     @if(count(Auth::user()->cupon->where('estatus','=',1)))
     <h6>Cupones Disponibles</h6>
-    <table class="table table-hover">
-      <thead>
-        <th>Nombre</th>
-        <th>Porcentaje</th>
-      </thead>
-      @foreach(Auth::user()->cupon->where('estatus','=',1) as $cuponuser)
-      <tr>
-        <td>{{title_case($cuponuser->cupon->nombre)}}</td>
-        <td>{{$cuponuser->cupon->porcentaje}}%</td>
-      </tr>
-      @endforeach
-    </table>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <th>Nombre</th>
+          <th>Porcentaje</th>
+        </thead>
+        @foreach(Auth::user()->cupon->where('estatus','=',1) as $cuponuser)
+        <tr>
+          <td>{{title_case($cuponuser->cupon->nombre)}}</td>
+          <td>{{$cuponuser->cupon->porcentaje}}%</td>
+        </tr>
+        @endforeach
+      </table>
+    </div>
     @endif
 	</div>
 

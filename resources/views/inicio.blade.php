@@ -149,22 +149,26 @@
            @foreach($productos->chunk(3) as $row)
 
            <div class="row">
+           
              
 
              @foreach($row as $producto)
              <div class="col-md-4">
 
-              <div class="card">
-                <img class="card-img-top" src="{{asset('storage').'/'.$producto->foto}}" alt="{{$producto->nombre}}">
+              <div class="card item-Height">
+                <div class="img-Height">
+                  <img class="card-img-top" src="{{asset('storage').'/'.$producto->foto}}" alt="{{$producto->nombre}}">
+                </div>
                 <div class="card-body">
                   <h5 class="card-title">{{title_case($producto->nombre)}}</h5>
-                  <p class="card-text">{{str_limit($producto->descripcion, 10)}}</p>
+                  <p class="card-text">{{str_limit($producto->descripcion, 100)}}</p>
                   <a href="{{url('compra').'/'.$producto->id}}" class="btn btn-danger">Comprar ${{$producto->precio}}</a>
                 </div>
               </div>
 
              </div>
              @endforeach
+          
            </div>
 
 
@@ -183,4 +187,12 @@
        </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script src="{{asset('/vendor/height/jquery.matchHeight-min.js')}}"></script>
+<script>
+  $(function() {
+    $('.item-Height').matchHeight();
+});
+</script>
 @endsection

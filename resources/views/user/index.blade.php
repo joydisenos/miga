@@ -13,7 +13,7 @@
 				<h3>Perfil {{title_case(Auth::user()->name)}}</h3>
 			</div>
 			
-
+<div class="table-responsive">
 			<table class="table table-hover">
 				<tr>
 					<td><strong>Puntos Acumulados</strong></td>
@@ -33,7 +33,8 @@
 				</tr>
 
 			</table>
-
+		</div>
+<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>
 					<th>Direcciones</th>
@@ -46,6 +47,7 @@
 				</tr>
 				@endforeach
 			</table>
+			</div>
 		</div>
 	</div>
 </div>

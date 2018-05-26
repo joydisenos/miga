@@ -69,6 +69,7 @@
 	@endif
 	<a href="{{url('/')}}" class="btn btn-outline-danger">Seguir Comprando</a>
 </div>
+<div class="table-responsive">
 
 	<table class="table table-hover">
           <thead>
@@ -142,6 +143,7 @@
         <?php 
 
         //Variables
+        $porcentaje=0;
         $envio = $datos->envio; 
         $total = $subtotal + $envio; 
         ?>
@@ -163,6 +165,7 @@
         @endif
       </tbody>
         </table>
+        </div>
 
 
 
@@ -176,18 +179,21 @@
 	<div class="text-right">
 		<a href="#" data-toggle="modal" data-target="#direccion" class="btn btn-outline-danger">Nueva Dirección</a>
 	</div>
+	<div class="table-responsive">
 	<table class="table table-hover">
 		<form action="{{url('checkout')}}" method="post">
 			<input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
-			<input type = 'hidden' name = 'descuento' value = '0'>
+			<input type = 'hidden' name = 'descuentoid' value = '0'>
+			<input type = 'hidden' name = 'descuento' value = '{{$porcentaje}}'>
+			<input type = 'hidden' name = 'envio' value = '{{$envio}}'>
 			<input type = 'hidden' name = 'total' id="formtotal" value = '{{$total}}'>
 		@foreach(Auth::user()->direccion as $direccion)
 		<tr>
 			<td>
-				<input type="radio" name="direccion" id="direccion" value="{{$direccion->id}}">
+				<input type="radio" name="direccion" id="direccion{{$direccion->id}}" value="{{$direccion->id}}">
 			</td>
 			<td>
-				<label for="direccion">{{$direccion->direccion}}</label>
+				<label for="direccion{{$direccion->id}}">{{$direccion->direccion}}</label>
 			</td>
 			<td>
 				{{$direccion->zip}}
@@ -287,6 +293,7 @@
 		-->
 		</form>
 	</table>
+	</div>
 	@else
 	<a href="#" data-toggle="modal" data-target="#direccion" class="btn btn-outline-danger">Registrar Dirección</a>
 	@endif
@@ -297,4 +304,111 @@
 
 
 </div>
+@endsection
+@section('scripts')
+<?php 
+
+  use Carbon\Carbon;
+  $hora = Carbon::now(-3);
+  $principal = App\Principal::first();
+
+?>
+@if(
+
+  $hora->format('l') >= 'Monday' && 
+  $hora->format('H:i') >= $principal->lunesa && 
+  $hora->hour <= $principal->lunesc
+
+  ||
+
+  $hora->format('l') >= 'Monday' && 
+  $hora->format('H:i') >= $principal->lunesat && 
+  $hora->hour <= $principal->lunesct
+
+  ||
+
+  $hora->format('l') >= 'Tuesday' && 
+  $hora->format('H:i') >= $principal->martesa && 
+  $hora->hour <= $principal->martesc
+
+  ||
+
+  $hora->format('l') >= 'Tuesday' && 
+  $hora->format('H:i') >= $principal->martesat && 
+  $hora->hour <= $principal->martesct
+
+  ||
+
+  $hora->format('l') >= 'Wednesday' && 
+  $hora->format('H:i') >= $principal->miercolesa && 
+  $hora->hour <= $principal->miercolesc
+
+  ||
+
+  $hora->format('l') >= 'Wednesday' && 
+  $hora->format('H:i') >= $principal->miercolesat && 
+  $hora->hour <= $principal->miercolesct
+
+  ||
+
+  $hora->format('l') >= 'Thursday' && 
+  $hora->format('H:i') >= $principal->juevesa && 
+  $hora->hour <= $principal->juevesc
+
+  ||
+
+  $hora->format('l') >= 'Thursday' && 
+  $hora->format('H:i') >= $principal->juevesat && 
+  $hora->hour <= $principal->juevesct
+
+  ||
+
+  $hora->format('l') >= 'Friday' && 
+  $hora->format('H:i') >= $principal->viernesa && 
+  $hora->hour <= $principal->viernesc
+
+  ||
+
+  $hora->format('l') >= 'Friday' && 
+  $hora->format('H:i') >= $principal->viernesat && 
+  $hora->hour <= $principal->viernesct
+
+  ||
+
+  $hora->format('l') >= 'Saturday' && 
+  $hora->format('H:i') >= $principal->sabadoa && 
+  $hora->hour <= $principal->sabadoc
+
+  ||
+
+  $hora->format('l') >= 'Saturday' && 
+  $hora->format('H:i') >= $principal->sabadoat && 
+  $hora->hour <= $principal->sabadoct
+
+  ||
+
+  $hora->format('l') >= 'Sunday' && 
+  $hora->format('H:i') >= $principal->domingoa && 
+  $hora->hour <= $principal->domingoc
+  
+  ||
+
+  $hora->format('l') >= 'Sunday' && 
+  $hora->format('H:i') >= $principal->domingoat && 
+  $hora->hour <= $principal->domingoct
+
+  )
+
+  @else
+ <script>
+	$(document).ready(function(){
+		swal(
+          'Estamos Cerrados!',
+          'Pero puedes ordenar tus compras para luego, indíquenos el día y la hora'
+        )
+	});
+</script>
+  @endif
+
+
 @endsection

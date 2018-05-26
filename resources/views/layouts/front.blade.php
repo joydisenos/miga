@@ -13,6 +13,8 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendor/slick/slick.css')}}" rel="stylesheet">
+    <link href="{{asset('vendor/slick/slick-theme.css')}}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{{asset('css/modern-business.css')}}" rel="stylesheet">
@@ -197,7 +199,7 @@
       <div class="modal-body">
         <form action="{{url('usuario/actualizar')}}" method="post">
       <input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
-      
+      <div class="table-responsive">
       <table class="table table-hover">
       
       <tr>
@@ -234,6 +236,7 @@
       </tr>
 
     </table>
+    </div>
 
     
       </div>
@@ -260,7 +263,7 @@
         
     <form action="{{url('usuario/direccion')}}" method="post">
       <input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
-      
+      <div class="table-responsive">
       <table class="table table-hover">
       
       <tr>
@@ -321,6 +324,7 @@
       </tr>
 
     </table>
+    </div>
 
    
                   
@@ -346,6 +350,7 @@
         </button>
       </div>
       <div class="modal-body">
+        <div class="table-responsive">
         <table class="table table-hover">
           <thead>
             <th>Producto</th>
@@ -380,6 +385,7 @@
         </tr>
       </tbody>
         </table>
+        </div>
                   
       </div>
       <div class="modal-footer">
@@ -402,7 +408,8 @@
     <!-- Bootstrap core JavaScript -->
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('toast/jquery.toast.min.js')}}"></script>
+    <script src="{{asset('js/sweetalert2.all.js')}}"></script>
+    <script src="{{asset('vendor/slick/slick.min.js')}}"></script>
     @yield('scripts')
   </body>
 

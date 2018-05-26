@@ -8,7 +8,7 @@
 <p>Usuario: {{$orden->user->name}}</p>
 <p>Teléfono: {{$orden->user->dato->telefono1}}</p>
 <p>Email: {{$orden->user->email}}</p> 
-<p>Dirección: {{$orden->direccion->direccion}} Código Postal: {{$orden->direccion->zip}} Referencia: {{$orden->direccion->referencia}}</p> 
+
 <p>Solicitado para: {{$orden->entrega}}</p> 
 
 <table style="width:100%; max-width: 600px; text-align: center;" class="table">
@@ -28,9 +28,21 @@
 	@endforeach
 
 	<tr>
+		
+		<td><strong>Descuento</strong></td>
+		<td>{{$orden->descuento}}%</td>
+		<td></td>
+
+	<tr>
+		<td></td>
+		<td><strong>Envío</strong></td>
+		<td>${{$orden->envio}}</td>
+	</tr>
+
+	<tr>
 		<td></td>
 		<td><strong>Total</strong></td>
-		<td>{{$orden->total}}</td>
+		<td>${{$orden->total}}</td>
 	</tr>
 </table>
 

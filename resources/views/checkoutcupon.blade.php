@@ -101,10 +101,13 @@
 	<div class="text-right">
 		<a href="#" data-toggle="modal" data-target="#direccion" class="btn btn-outline-danger">Nueva Dirección</a>
 	</div>
+	<div class="table-responsive">
 	<table class="table table-hover">
 		<form action="{{url('checkout')}}" method="post">
 			<input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
-			<input type = 'hidden' name = 'descuento' value = '{{$cupon->id}}'>
+			<input type = 'hidden' name = 'descuentoid' value = '{{$cupon->id}}'>
+			<input type = 'hidden' name = 'descuento' value = '{{$cupon->cupon->porcentaje}}'>
+			<input type = 'hidden' name = 'envio' value = '{{$envio}}'>
 			<input type = 'hidden' name = 'total' id="formtotal" value = '{{$total}}'>
 		@foreach(Auth::user()->direccion as $direccion)
 		<tr>
@@ -212,6 +215,8 @@
 		-->
 		</form>
 	</table>
+
+	</div>
 	@else
 	<a href="#" data-toggle="modal" data-target="#direccion" class="btn btn-outline-danger">Registrar Dirección</a>
 	@endif

@@ -260,9 +260,9 @@ class UsuarioController extends Controller
         'direccion' => 'required',
         ]);
 
-        if($request->descuento != 0)
+        if($request->descuentoid != 0)
         {
-            $cupon = Cuponesuser::findOrFail($request->descuento);
+            $cupon = Cuponesuser::findOrFail($request->descuentoid);
             $cupon->estatus = 2;
             $cupon->save();
         }
@@ -270,7 +270,11 @@ class UsuarioController extends Controller
         $datos = Principal::first();
 
         $orden = new Ordene();
+        
+        $orden->descuento = $request->descuento;
 
+        $orden->envio = $request->envio;
+        
         $orden->user_id = Auth::user()->id;
         
         $orden->total = $request->total;

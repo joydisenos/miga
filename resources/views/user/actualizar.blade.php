@@ -14,43 +14,44 @@
 	<div class="col-md-8 formulario">
 		<form action="{{url('usuario/actualizar')}}" method="post">
 			<input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
-			
-			<table class="table table-hover">
-			
-			<tr>
-				<td>
-					Teléfono 1
-				</td>
-				<td>
-					<input type="number" placeholder="Ingrese un número de teléfono"  name="telefono1" class="form-control" required>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Teléfono 2
-				</td>
-				<td>
-					<input type="number" placeholder="Ingrese un número de teléfono"  name="telefono2" class="form-control">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					Fecha de Nacimiento
-				</td>
-				<td>
-					<input type="date" class="form-control" name="nacimiento" placeholder="AAAA/MM/DD" required>
-				</td>
-			</tr>
-			<tr>
-				<td>
+			<div class="table-responsive">
+					<table class="table table-hover">
 					
-				</td>
-				<td>
-					<button type="submit" class="btn btn-outline-danger">Guardar</button>
-				</td>
-			</tr>
+					<tr>
+						<td>
+							Teléfono 1
+						</td>
+						<td>
+							<input type="number" placeholder="Ingrese un número de teléfono"  name="telefono1" class="form-control" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Teléfono 2
+						</td>
+						<td>
+							<input type="number" placeholder="Ingrese un número de teléfono"  name="telefono2" class="form-control">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Fecha de Nacimiento
+						</td>
+						<td>
+							<input type="date" class="form-control" name="nacimiento" placeholder="AAAA/MM/DD" required>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							
+						</td>
+						<td>
+							<button type="submit" class="btn btn-outline-danger">Guardar</button>
+						</td>
+					</tr>
 
-		</table>
+				</table>
+		</div>
 
 		</form>
 	</div>

@@ -11,6 +11,7 @@
 		</div>
 		
 		<div class="col-md-12 formulario">
+			<div class="table-responsive">
 			<table class="table table-hover">
 				<thead>
 					<th>Usuario</th>
@@ -36,6 +37,7 @@
 				@endforeach
 				
 			</table>
+		</div>
 		</div>
 	</div>
 </div>

@@ -28,8 +28,10 @@ class SiteController extends Controller
 
     public function show($id)
     {
-    	$producto = Producto::findOrFail($id);
-    	return view ('compra' , compact('producto'));
+        $producto = Producto::findOrFail($id);
+    	$sliders = Producto::where('estatus','=','1')->get();
+
+    	return view ('compra' , compact('producto','sliders'));
     }
     public function store(Request $request)
     {

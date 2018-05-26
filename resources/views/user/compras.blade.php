@@ -14,7 +14,7 @@
 	<div class="col-md-10 formulario">
 
 		<h3>Historial de Compras</h3>
-	
+	<div class="table-responsive">
 			<table class="table table-hover">
 		<thead>
 			<th>Orden</th>
@@ -47,7 +47,7 @@
 			</tbody>
 		@endforeach
 	</table>
-
+</div>
 
 	</div>
 

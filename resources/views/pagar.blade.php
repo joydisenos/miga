@@ -16,7 +16,7 @@ $preference_data = array(
             "currency_id" => "ARS",
             "category_id" => "Alimentos",
             "quantity" => 1,
-            "unit_price" => $orden->total
+            "unit_price" => (float)$orden->total
         )
     ),
 
@@ -46,7 +46,7 @@ $preference = $mp->create_preference($preference_data);
 	
 
 	<h3>Elegir Método de Pago</h3>
-
+<div class="table-responsive">
 	<table class="table table-hover">
           
        <tbody>
@@ -131,6 +131,7 @@ $preference = $mp->create_preference($preference_data);
           
       </tbody>
         </table>
+        </div>
 
 
 

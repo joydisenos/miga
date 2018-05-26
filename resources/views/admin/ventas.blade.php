@@ -78,6 +78,7 @@
        	<li><strong>Dirección:</strong> {{$venta->direccion->direccion}}</li>
        	<li><strong>Día Solicitado:</strong> {{$venta->entrega}}</li>
        </ul>
+			<div class="table-responsive">
 			<table class="table table-hover">
 			<tr>
 				<td>Nombre</td>
@@ -100,8 +101,36 @@
 			</tr>
 			
 			@endforeach
+
+			<tr>
+				<td>Descuento</td>
+				<td>{{$venta->descuento}}</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td>Envío</td>
+				<td>{{$venta->envio}}</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+
+			<tr>
+				<td>Total</td>
+				<td>{{$venta->total}}</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
 			
 		</table>
+		</div>
         
       </div>
       <div class="modal-footer">

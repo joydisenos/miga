@@ -15,6 +15,7 @@
 		<h3>Agregar Dirección</h3>
 		<form action="{{url('usuario/direccion')}}" method="post">
 			<input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
+			<div class="table-responsive">
 			
 			<table class="table table-hover">
 			
@@ -76,6 +77,7 @@
 			</tr>
 
 		</table>
+		</div>
 
 		</form>
 	</div>

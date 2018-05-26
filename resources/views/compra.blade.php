@@ -53,8 +53,22 @@
         </div>
       </div>
       <!-- /.row -->
+<div class="text-center">
+  <h5>Más Productos</h5>
+</div>
 
-	
+	<div class="slider">
+   @foreach($sliders as $slide)
+   <div>
+   <a href="{{url('compra').'/'.$slide->id}}">
+     <div style="max-height: 300px; overflow: hidden;">
+        <img src="{{asset('storage').'/'.$slide->foto}}" class="img-fluid" alt="{{$slide->nombre}}">
+     </div>
+     <div class="title text-center"> <h4>{{$slide->nombre}}</h4></div>
+   </a>
+   </div>
+   @endforeach 
+  </div>
 
 
 </div>
@@ -62,6 +76,8 @@
 
 @section('scripts')
 <script>
+
+
 
   var precio = {{$producto->precio}};
   var value = $('#cantidad').val();
@@ -74,6 +90,17 @@
 
     $('#precio').text(value*precio);
   
+    });
+
+
+    $(document).ready(function(){
+        
+          $('.slider').slick({
+          infinite: true,
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          autoplay: true
+        });
     });
 
 </script>

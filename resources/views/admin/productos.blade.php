@@ -11,60 +11,62 @@
 		</div>
 		<div class="col-md-9 formulario">
 			<h3>Productos</h3>
-			<table class="table table-hover">
-				<thead>
-				
-						<th>Foto</th>
-						<th>Nombre</th>
-						<th>Categorías</th>
-						<th>Precio</th>
-						<th>Cantidades</th>
-						<th>Visibilidad</th>
-						<th></th>
-				
-				</thead>
-				<tbody>
+			<div class="table-responsive">
+				<table class="table table-hover">
+					<thead>
 					
-
-						@foreach($productos as $producto)
-						<tr>
-
-						<td>
-							<img width="60" src="{{asset('storage').'/'.$producto->foto}}" alt="">
-						</td>
-						<td>
-							{{$producto->nombre}}
-						</td>
-						<td>
-							{{$producto->categoria->nombre}}
-						</td>
-						<td>
-							${{$producto->precio}}
-						</td>
+							<th>Foto</th>
+							<th>Nombre</th>
+							<th>Categorías</th>
+							<th>Precio</th>
+							<th>Cantidades</th>
+							<th>Visibilidad</th>
+							<th></th>
+					
+					</thead>
+					<tbody>
 						
-						<td>
+
+							@foreach($productos as $producto)
+							<tr>
+
+							<td>
+								<img width="60" src="{{asset('storage').'/'.$producto->foto}}" alt="">
+							</td>
+							<td>
+								{{$producto->nombre}}
+							</td>
+							<td>
+								{{$producto->categoria->nombre}}
+							</td>
+							<td>
+								${{$producto->precio}}
+							</td>
 							
-							{{$producto->cantidades}}
-						</td>
+							<td>
+								
+								{{$producto->cantidades}}
+							</td>
 
-						<td>
-							@if($producto->estatus==1)
-							<a class="btn btn-success" href="{{url('admin-panel/activar').'/'.$producto->id.'/2'}}">Activo</a>
-							@elseif($producto->estatus==2)
-							<a class="btn btn-danger" href="{{url('admin-panel/activar').'/'.$producto->id.'/1'}}">Oculto</a>
-							@endif
-						</td>
-						
-						<td>
-							<a class="btn btn-outline-danger" href="{{url('admin-panel/producto').'/'.$producto->id}}">Editar</a>
-						</td>
+							<td>
+								@if($producto->estatus==1)
+								<a class="btn btn-success" href="{{url('admin-panel/activar').'/'.$producto->id.'/2'}}">Activo</a>
+								@elseif($producto->estatus==2)
+								<a class="btn btn-danger" href="{{url('admin-panel/activar').'/'.$producto->id.'/1'}}">Oculto</a>
+								@endif
+							</td>
+							
+							<td>
+								<a class="btn btn-outline-danger" href="{{url('admin-panel/producto').'/'.$producto->id}}">Editar</a>
+							</td>
 
-						</tr>
-						@endforeach
+							</tr>
+							@endforeach
+							
 						
-					
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			</div>
 					
 						{{ $productos->links() }}
 					
