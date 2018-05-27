@@ -40,7 +40,7 @@
 					<th>Direcciones</th>
 					<th><a href="{{url('usuario/direccion')}}" class="btn btn-outline-danger">Agregar Dirección</a></th>
 				</thead>
-				@foreach(Auth::user()->direccion as $direccion)
+				@foreach(Auth::user()->direccion->where('estatus','=',1) as $direccion)
 				<tr>
 					<td>{{$direccion->direccion}}, Código Postal {{$direccion->zip}}, {{$direccion->referencia}}</td>
 					<td> <a href="{{url('usuario/direccion/borrar').'/'.$direccion->id}}" class="btn btn-danger">X</a></td>

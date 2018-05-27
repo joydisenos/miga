@@ -4,10 +4,10 @@
 <div class="container">
 	
 
-<h1 class="mt-4 mb-3">{{$producto->nombre}}
+<h1 class="mt-4 mb-3">{{title_case($producto->nombre)}}
         <small>
 
-         {{$producto->categoria->nombre}}
+         {{title_case($producto->categoria->nombre)}}
         
         </small>
       </h1>
@@ -16,7 +16,7 @@
         <li class="breadcrumb-item">
           <a href="{{url('/')}}">Compra</a>
         </li>
-        <li class="breadcrumb-item active">{{$producto->nombre}}</li>
+        <li class="breadcrumb-item active">{{title_case($producto->nombre)}}</li>
       </ol>
 
       <!-- Intro Content -->
@@ -64,8 +64,8 @@
      <div style="max-height: 300px; overflow: hidden;">
         <img src="{{asset('storage').'/'.$slide->foto}}" class="img-fluid" alt="{{$slide->nombre}}">
      </div>
-     <div class="title text-center d-none d-md-block"> <h4>{{$slide->nombre}}</h4></div>
-     <div class="title text-center d-md-none"> <p>{{$slide->nombre}}</p></div>
+     <div class="title text-center d-none d-md-block"> <h4>{{title_case($slide->nombre)}}</h4></div>
+     <div class="title text-center d-md-none"> <p>{{title_case($slide->nombre)}}</p></div>
    </a>
    </div>
    @endforeach 

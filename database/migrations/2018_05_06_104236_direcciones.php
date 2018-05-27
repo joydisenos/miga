@@ -29,6 +29,8 @@ class Direcciones extends Migration
         $table->longText('direccion');
         
         $table->longText('referencia');
+
+        $table->integer('estatus')->default(1);
         
         /**
          * Foreignkeys section

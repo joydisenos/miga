@@ -12,6 +12,7 @@
     <title>Sondemiga.com - Panel Administrativo</title>
 
     <!-- Bootstrap core CSS -->
+    <link rel="icon" href="{{asset('favicon.ico')}}" />
     <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Custom styles for this template -->

@@ -33,6 +33,9 @@
 .btn{
 	margin-bottom: 10px;
 }
+.card{
+	margin-bottom: 10px;
+}
 .carrito-movil{
 	position: fixed;
 	bottom: 10px;
@@ -50,4 +53,11 @@
 .carrito-logo{
 	padding-top: 11px;
 	color: #ffffff;
+}
+
+@media (max-width: 600px){
+	.btn{
+		display: block;
+		width: 100%;
+		}
 }

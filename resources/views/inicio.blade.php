@@ -22,91 +22,94 @@
 
   @if(
 
-  $hora->format('l') >= 'Monday' && 
+  $hora->format('l') == 'Monday' && 
   $hora->format('H:i') >= $principal->lunesa && 
-  $hora->hour <= $principal->lunesc
+  $hora->format('H:i') < $principal->lunesc
 
   ||
 
-  $hora->format('l') >= 'Monday' && 
+  $hora->format('l') == 'Monday' && 
   $hora->format('H:i') >= $principal->lunesat && 
-  $hora->hour <= $principal->lunesct
+  $hora->format('H:i') < $principal->lunesct
 
   ||
 
-  $hora->format('l') >= 'Tuesday' && 
+  $hora->format('l') == 'Tuesday' && 
   $hora->format('H:i') >= $principal->martesa && 
-  $hora->hour <= $principal->martesc
+  $hora->format('H:i') < $principal->martesc
 
   ||
 
-  $hora->format('l') >= 'Tuesday' && 
+  $hora->format('l') == 'Tuesday' && 
   $hora->format('H:i') >= $principal->martesat && 
-  $hora->hour <= $principal->martesct
+  $hora->format('H:i') < $principal->martesct
 
   ||
 
-  $hora->format('l') >= 'Wednesday' && 
+  $hora->format('l') == 'Wednesday' && 
   $hora->format('H:i') >= $principal->miercolesa && 
-  $hora->hour <= $principal->miercolesc
+  $hora->format('H:i') < $principal->miercolesc
 
   ||
 
-  $hora->format('l') >= 'Wednesday' && 
+  $hora->format('l') == 'Wednesday' && 
   $hora->format('H:i') >= $principal->miercolesat && 
-  $hora->hour <= $principal->miercolesct
+  $hora->format('H:i') < $principal->miercolesct
 
   ||
 
-  $hora->format('l') >= 'Thursday' && 
+  $hora->format('l') == 'Thursday' && 
   $hora->format('H:i') >= $principal->juevesa && 
-  $hora->hour <= $principal->juevesc
+  $hora->format('H:i') <= $principal->juevesc
 
   ||
 
-  $hora->format('l') >= 'Thursday' && 
+  $hora->format('l') == 'Thursday' && 
   $hora->format('H:i') >= $principal->juevesat && 
-  $hora->hour <= $principal->juevesct
+  $hora->format('H:i') < $principal->juevesct
 
   ||
 
-  $hora->format('l') >= 'Friday' && 
+  $hora->format('l') == 'Friday' && 
   $hora->format('H:i') >= $principal->viernesa && 
-  $hora->hour <= $principal->viernesc
+  $hora->format('H:i') < $principal->viernesc
 
   ||
 
-  $hora->format('l') >= 'Friday' && 
+  $hora->format('l') == 'Friday' && 
   $hora->format('H:i') >= $principal->viernesat && 
-  $hora->hour <= $principal->viernesct
+  $hora->format('H:i') < $principal->viernesct
 
   ||
 
-  $hora->format('l') >= 'Saturday' && 
+  $hora->format('l') == 'Saturday' && 
   $hora->format('H:i') >= $principal->sabadoa && 
-  $hora->hour <= $principal->sabadoc
+  $hora->format('H:i') < $principal->sabadoc
 
   ||
 
-  $hora->format('l') >= 'Saturday' && 
+  $hora->format('l') == 'Saturday' && 
   $hora->format('H:i') >= $principal->sabadoat && 
-  $hora->hour <= $principal->sabadoct
+  $hora->format('H:i') < $principal->sabadoct
 
   ||
 
-  $hora->format('l') >= 'Sunday' && 
+  $hora->format('l') == 'Sunday' && 
   $hora->format('H:i') >= $principal->domingoa && 
-  $hora->hour <= $principal->domingoc
+  $hora->format('H:i') < $principal->domingoc
   
   ||
 
-  $hora->format('l') >= 'Sunday' && 
+  $hora->format('l') == 'Sunday' && 
   $hora->format('H:i') >= $principal->domingoat && 
-  $hora->hour <= $principal->domingoct
+  $hora->format('H:i') < $principal->domingoct
 
   )
 
   <div class="bg-success text-center text-white">
+
+   
+
     
       <p><span class="text-yellow">Sondemiga.com - <strong>ABIERTO</strong></span>
       <br>
@@ -128,6 +131,8 @@
 
 
   <div class="bg-danger text-center text-white">
+
+    
     
       <p><span class="text-yellow">Sondemiga.com - <strong>CERRADO</strong></span>
       <br>

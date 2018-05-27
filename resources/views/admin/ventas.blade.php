@@ -17,6 +17,7 @@
 			<th>Dirección</th>
 			<th>Estatus</th>
 			<th>Detalles</th>
+			<th>Cancelar</th>
 
 		</thead>
 		@foreach($ventas as $venta)
@@ -32,16 +33,24 @@
 				
 				@if($venta->estatus==1)
 				
-				<a class="btn btn-danger" href="{{url('admin-panel/entregar').'/'.$venta->id.'/2'}}">Por Entregar</a>
+				<a class="btn btn-outline-danger" href="{{url('admin-panel/entregar').'/'.$venta->id.'/2'}}">Por Entregar</a>
 
 				@elseif($venta->estatus==2)
 				
 
 				<button class="btn btn-success">Entregado</button>
 
+				@elseif($venta->estatus==3)
+				
+
+				<button class="btn btn-danger">Cancelado</button>
+
 				@endif
 			</td>
 			<td><button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#orden{{$venta->id}}">Detalles</button></td>
+			<td>
+				<a class="btn btn-danger" href="{{url('admin-panel/entregar').'/'.$venta->id.'/3'}}">Cancelar</a>
+			</td>
 		</tr>
 
 		

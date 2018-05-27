@@ -12,6 +12,7 @@
     <title>Sondemiga.com - Fábrica de Sandwiches de Azul | La mejor forma de pedir sandwiches de miga en Azul</title>
 
     <!-- Bootstrap core CSS -->
+    <link rel="icon" href="{{asset('favicon.ico')}}" />
     <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('vendor/slick/slick.css')}}" rel="stylesheet">
     <link href="{{asset('vendor/slick/slick-theme.css')}}" rel="stylesheet">
@@ -64,9 +65,6 @@
 
 
             
-            <li class="nav-item">
-              <a class="nav-link" href="#">Kioscos</a>
-            </li>
             @guest
             <li class="nav-item">
               <a class="nav-link" href="{{url('register')}}">Registro</a>
@@ -367,7 +365,7 @@
           <td>{{$compra->producto->nombre}}</td>
           <td>{{$compra->cantidad}}</td>
           <td>${{$compra->cantidad*($compra->producto->precio)}}</td>
-          <td><a href="{{url('usuario/compra/borrar').'/'.$compra->id}}" class="btn btn-outline-danger">X</a></td>
+          <td><a href="{{url('usuario/compra/borrar').'/'.$compra->id}}" class="btn btn-outline-danger"> <i class="fas fa-trash-alt"></i> </a></td>
         </tr>
         <?php $total = $total + ($compra->cantidad*($compra->producto->precio)) ?>
        

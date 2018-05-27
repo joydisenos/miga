@@ -39,6 +39,7 @@ Route::post('/pago/{id}/{tipo}', 'UsuarioController@mercadopago');
 Route::get('/pagos/{id}/fail', 'UsuarioController@fail');
 Route::get('/pagos/{id}/pendiente', 'UsuarioController@pendiente');
 Route::get('/pagos/{id}/mercadopago', 'UsuarioController@success');
+Route::post('/pagos/{id}/mercadopago', 'UsuarioController@success');
 
 //User
 
@@ -61,7 +62,7 @@ Route::prefix('usuario')->middleware('auth')->group(function(){
 
 //Admin
 
-Route::prefix('admin-panel')->middleware('auth')->group(function(){
+Route::prefix('admin-panel')->middleware(['role:admin|dev'])->group(function(){
   Route::get('/','AdminController@index');
   Route::get('/productos','AdminController@producto_index');
   Route::get('/producto','AdminController@producto_new');

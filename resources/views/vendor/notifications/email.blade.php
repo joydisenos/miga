@@ -4,9 +4,9 @@
 # {{ $greeting }}
 @else
 @if ($level == 'error')
-# Whoops!
+# Ooops!
 @else
-# Hello!
+# Saludos!
 @endif
 @endif
 

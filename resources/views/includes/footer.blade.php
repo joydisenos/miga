@@ -5,11 +5,14 @@
         <div class="social">
         	<div class="text-white text-center">
         		
-				<i class="fab fa-facebook-square"></i>
-				<i class="fab fa-instagram"></i>
-				<i class="fas fa-star"></i>
-				<i class="far fa-money-bill-alt"></i>
-				<i class="fas fa-phone-volume"></i>
+			
+
+        <a href="https://www.facebook.com/pg/sondemiga" style="color:#fff"> <i class="fab fa-facebook-f"></i> Facebook</a>
+
+        <a href="https://www.facebook.com/pg/sondemiga/reviews/" style="color:#fff"> <i class="fas fa-star"></i> Califícanos</a>
+
+        <a href="tel:02281318667"> <i class="fas fa-phone-volume" style="color:#fff"></i> 02281318667</a>
+
 
         	</div>
           

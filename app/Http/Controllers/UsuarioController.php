@@ -85,7 +85,7 @@ class UsuarioController extends Controller
             $cuponesuser->cupone_id = $id;
             $cuponesuser->save();
 
-            return redirect ('usuario/canje')->with('status','Cupón Obtenido!');
+            return redirect ('usuario/canje')->with('status','Cupón Obtenido, en tu próximo pedido podrás usas este cupón de descuento! ');
 
         }else{
         
@@ -183,7 +183,9 @@ class UsuarioController extends Controller
     public function direccion_borrar ($id)
     {
         $direccion = Direccione::findOrFail($id);
-        $direccion->delete();
+        $direccion->estatus = 2;
+        $direccion->save();
+        
         return redirect('usuario');
     }
     public function actualizar()
