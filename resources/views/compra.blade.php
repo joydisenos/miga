@@ -64,7 +64,8 @@
      <div style="max-height: 300px; overflow: hidden;">
         <img src="{{asset('storage').'/'.$slide->foto}}" class="img-fluid" alt="{{$slide->nombre}}">
      </div>
-     <div class="title text-center"> <h4>{{$slide->nombre}}</h4></div>
+     <div class="title text-center d-none d-md-block"> <h4>{{$slide->nombre}}</h4></div>
+     <div class="title text-center d-md-none"> <p>{{$slide->nombre}}</p></div>
    </a>
    </div>
    @endforeach 
@@ -99,7 +100,17 @@
           infinite: true,
           slidesToShow: 4,
           slidesToScroll: 1,
-          autoplay: true
+          autoplay: true,
+           responsive: [
+           {
+                  breakpoint: 600,
+                      settings: {
+                          slidesToShow: 2,
+                          slidesToScroll: 1,
+                          infinite: true,
+                      }
+                },
+                ]
         });
     });
 
