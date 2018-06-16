@@ -17,8 +17,7 @@ use App\Premio;
 use App\Cupone;
 use App\Direccione;
 
-$mp = base_path("/vendor/mercadopago/sdk/lib/mercadopago.php");
-require_once $mp;
+
 
 class UsuarioController extends Controller
 {
@@ -327,36 +326,28 @@ class UsuarioController extends Controller
                         $orden->estatus = 3;
                         $orden->save();
 
-                        $productos = Compra::where('ordene_id','=','0')->where('user_id','=', $user_id)->get();
-
-                        foreach ($productos as $producto)
-                        {
-                            $producto->ordene_id = $id;
-                            $producto->save();
-                        }
 
         return redirect('usuario')->with('status','Su pago esta en estatus pendiente, en breve verificaremos su transacción');
     }
+
+    
 
     public function success( $id , Request $request)
     {
 
         
 
-        $user_id=Auth::user()->id;
+                        $user_id=Auth::user()->id;
         
                         $orden = Ordene::findOrFail($id);
                         $orden->pago = 'mercadopago N°'.$request->id;
                         $orden->estatus = 1;
                         $orden->save();
 
-                        $productos = Compra::where('ordene_id','=','0')->where('user_id','=', $user_id)->get();
+                         Mail::to('pedidos@sondemiga.com','Sondemiga.com')
 
-                        foreach ($productos as $producto)
-                        {
-                            $producto->ordene_id = $id;
-                            $producto->save();
-                        }
+                   ->send(new OrdenMail($orden));
+
 
         return redirect('usuario')->with('status','Fué Exitoso en breves nos pondremos en contacto para realizar su envío!');
     }
@@ -406,6 +397,38 @@ class UsuarioController extends Controller
                 }
     }
 
+    public function pedido_mp($id)
+    {
+
+
+
+            $user_id=Auth::user()->id;
+                
+            $orden = Ordene::findOrFail($id);
+            $orden->pago = 'mercadopago por procesar';
+            $orden->estatus = 3;
+            $orden->save();
+
+            $productos = Compra::where('ordene_id','=','0')->where('user_id','=', $user_id)->get();
+
+            foreach ($productos as $producto)
+            {
+                $producto->ordene_id = $id;
+                $producto->save();
+            }       
+      
+
+            Mail::to('pedidos@sondemiga.com','Sondemiga.com')
+
+                   ->send(new OrdenMail($orden));
+
+
+        
+
+        return view ('mporden',compact('orden'));
+
+    }
+
     public function definir_pago ($id, $tipo)
     {
 
@@ -424,12 +447,6 @@ class UsuarioController extends Controller
                 $producto->save();
             }
         
-        // $puntos = Auth::user()->dato;
-
-        // $puntos->puntos = $puntos->puntos + (($orden->total)/2);
-        // $puntos->save();
-
-        //mail
 
             Mail::to('pedidos@sondemiga.com','Sondemiga.com')
 

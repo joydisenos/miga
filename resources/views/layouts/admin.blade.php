@@ -55,6 +55,22 @@
               <a class="nav-link" href="{{url('/admin-panel/canje')}}">Canje</a>
             </li>
 
+            <?php $notificaciones = App\Ordene::where('estatus','=',1)->get();
+            $notificacionesCount = App\Ordene::where('estatus','=',1)->count();
+             ?>
+                @if(count($notificaciones))
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="notificaciones" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i><span class="badge badge-light">{{$notificacionesCount}}</span></a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notificaciones">
+                
+                @foreach($notificaciones as $notificacion)
+                <a class="dropdown-item" href="{{url('admin-panel/ventas')}}">Orden N° {{$notificacion->id}}, {{$notificacion->pago}}</a>
+                @endforeach
+                
+              </div>
+            </li>
+            @endif
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{title_case(Auth::user()->name)}}
@@ -109,7 +125,8 @@
     <!-- Bootstrap core JavaScript -->
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('toast/jquery.toast.min.js')}}"></script>
+    <script src="{{asset('js/sweetalert2.all.js')}}"></script>
+    <script src="{{asset('vendor/slick/slick.min.js')}}"></script>
     @yield('scripts')
   </body>
 

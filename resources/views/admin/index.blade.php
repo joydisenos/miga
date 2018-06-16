@@ -9,6 +9,7 @@
 			<h3>Bienvenido, {{title_case(Auth::user()->name)}}</h3>
 		</div>
 		<div class="col-md-8 formulario">
+			
 			<table class="table table-hover">
 				
 					<tr>
@@ -27,6 +28,40 @@
 
 				
 			</table>
+
+			@if(count($notificaciones))
+			<div class="container">
+				<div class="text-center">
+					<h6>Ordenes Pendientes</h6>
+				</div>
+				@foreach($notificaciones->chunk(3) as $row)
+					<div class="row">
+						@foreach($row as $notificacion)
+						<div class="col-sm-4">
+						<div class="border border-danger">
+							
+							
+								<div class="notificacion formulario">
+									<p><strong>Orden:</strong> {{$notificacion->id}}</p>
+									<p><strong>Pago:</strong> {{$notificacion->pago}}</p>
+									<p><strong>Total:</strong> {{$notificacion->total}}</p>
+									<div class="text-center">
+										<a class="btn btn-danger" href="{{url('admin-panel/entregar').'/'.$notificacion->id.'/2'}}">Entregar</a>
+									</div>
+								</div>
+								
+								
+							
+						
+						</div>
+						</div>
+						@endforeach			
+					</div>
+				@endforeach
+			</div>
+			@endif
+
+			
 		</div>
 	</div>
 </div>

@@ -23,7 +23,8 @@ class AdminController extends Controller
     {
         $usuarios = User::all()->count();
         $productos = Producto::all()->count();
-         $ventas = Ordene::where('pago','!=','pendiente')->count();
+        $ventas = Ordene::where('pago','!=','pendiente')->count();
+        $notificaciones = Ordene::where('estatus','=',1)->get();
         $principal = Principal::first();
          if(!$principal)
          {
@@ -34,7 +35,16 @@ class AdminController extends Controller
             $principal->save();
          }
 
-    	return view('admin.index',compact('usuarios','productos','ventas','principal'));
+    	return view('admin.index',compact('usuarios','productos','ventas','principal','notificaciones'));
+    }
+
+    public function eliminar_user($id)
+    {
+        $user=User::findOrFail($id);
+        $user->estatus= 0;
+        $user->save();
+
+        return redirect()->back()->with('status','Usuario eliminado exitosamente');
     }
 
     public function updateprincipal(Request $request)
@@ -48,7 +58,7 @@ class AdminController extends Controller
 
     public function usuarios()
     {
-        $usuarios = User::all();
+        $usuarios = User::where('estatus','!=', 0)->get();
 
         return view('admin.usuarios',compact('usuarios'));
     }

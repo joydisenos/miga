@@ -20,6 +20,7 @@
 					<th>Teléfono 2</th>
 					<th>Fecha de Nacimiento</th>
 					<th>puntos</th>
+					<th>Eliminar</th>
 				</thead>
 
 				@foreach($usuarios as $usuario)
@@ -32,6 +33,11 @@
 					<td>{{$usuario->dato->telefono2}}</td>
 					<td>{{date('d/m/y' , strtotime($usuario->dato->nacimiento))}}</td>
 					<td>{{$usuario->dato->puntos}}</td>
+					<td>
+						<a class="btn btn-danger users" data="{{title_case($usuario->name)}}" href="usuario/eliminar/{{$usuario->id}}"><i class="fas fa-trash-alt"></i></a>
+						
+
+					</td>
 				</tr>
 
 				@endforeach
@@ -44,4 +50,50 @@
 
 
 
+@endsection
+@section('scripts')
+
+<script>
+				
+const swalWithBootstrapButtons = swal.mixin({
+  confirmButtonClass: 'btn btn-success',
+  cancelButtonClass: 'btn btn-danger',
+  buttonsStyling: false,
+});
+				$('.users').click(function(){
+								event.preventDefault();
+								var href = $(this).attr('href');
+								var nombre = $(this).attr('data');
+
+								
+
+
+
+
+
+swalWithBootstrapButtons({
+  title: 'Eliminar usuario '+nombre+'?',
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Eliminar',
+  cancelButtonText: 'Cancelar',
+  reverseButtons: true
+}).then((result) => {
+  if (result.value) {
+
+    location.href = href;
+
+  } else if (
+    
+    result.dismiss === swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons(
+      'Cancelado'
+    )
+  }
+});
+									      
+									    	});
+						
+</script>
 @endsection

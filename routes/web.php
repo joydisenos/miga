@@ -38,6 +38,7 @@ Route::get('/pago/{id}/{tipo}', 'UsuarioController@definir_pago');
 Route::post('/pago/{id}/{tipo}', 'UsuarioController@mercadopago');
 Route::get('/pagos/{id}/fail', 'UsuarioController@fail');
 Route::get('/pagos/{id}/pendiente', 'UsuarioController@pendiente');
+Route::get('/mp/pagos/{id}', 'UsuarioController@pedido_mp');
 Route::get('/pagos/{id}/mercadopago', 'UsuarioController@success');
 Route::post('/pagos/{id}/mercadopago', 'UsuarioController@success');
 
@@ -63,6 +64,10 @@ Route::prefix('usuario')->middleware('auth')->group(function(){
 //Admin
 
 Route::prefix('admin-panel')->middleware(['role:admin|dev'])->group(function(){
+
+  //Usuarios 
+  Route::get('/usuario/eliminar/{id}','AdminController@eliminar_user');
+
   Route::get('/','AdminController@index');
   Route::get('/productos','AdminController@producto_index');
   Route::get('/producto','AdminController@producto_new');

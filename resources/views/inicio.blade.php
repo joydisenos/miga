@@ -131,7 +131,6 @@
 
 
   <div class="bg-danger text-center text-white">
-
     
     
       <p><span class="text-yellow">Sondemiga.com - <strong>CERRADO</strong></span>
@@ -145,11 +144,17 @@
  
   @endif
 
-
+<div class="container"> 
+  <div class="slider_categorias text-center mb-2">
+    @foreach($categorias as $categoria)
+      <a class="dropdown-item" href="{{url('/filtro').'/'.$categoria->id}}">{{$categoria->nombre}}</a>
+    @endforeach
+  </div>
+</div>
 
 <div class="container">
     <div class="row">
-       <div class="col-md-8">
+       <div class="col-md-8 d-none d-md-block">
            
            @foreach($productos->chunk(3) as $row)
 
@@ -180,6 +185,27 @@
            @endforeach
 
        </div>
+       <div class="col d-block d-md-none">
+         @foreach($productos as $producto)
+             
+
+       <div class="row">
+                <div class="col-xs-6">
+                  <img class="card-img-top" src="{{asset('storage').'/'.$producto->foto}}" alt="{{$producto->nombre}}">
+                </div>
+                <div class="col-xs-6">
+                  <h5 class="card-title">{{title_case($producto->nombre)}}</h5>
+                  <p class="card-text">{{str_limit($producto->descripcion, 100)}}</p>
+                  <a href="{{url('compra').'/'.$producto->id}}" class="btn btn-danger">Comprar ${{$producto->precio}}</a>
+                </div>
+               
+                  
+               
+           
+</div>
+            
+             @endforeach
+       </div>
        <div class="col-md-4">
            <div class="apk bg-danger text-white">
                <h5>LLEVÁ SONDEMIGA EN TU BOLSILLO!</h5>
@@ -198,6 +224,13 @@
 <script>
   $(function() {
     $('.item-Height').matchHeight();
+});
+  $('.slider_categorias').slick({
+  infinite: true,
+  slidesToShow: 5,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 3000,
 });
 </script>
 @endsection

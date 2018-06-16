@@ -255,25 +255,35 @@
 			</td>
 		</tr>
 		
-		@if(Auth::user()->dato->telefono1=='')
+		@if(Auth::user()->dato)
+    @if(Auth::user()->dato->telefono1=='')
 
-		<tr>
-			<td colspan="3"> <div class="text-center">
-	
-		<a href="#" data-toggle="modal" data-target="#datos" class="btn btn-outline-danger">Completar Datos</a>
+    <tr>
+      <td colspan="3"> <div class="text-center">
+  
+    <a href="#" data-toggle="modal" data-target="#datos" class="btn btn-outline-danger">Completar Datos</a>
 
-		</div>	</td>
-		</tr>
+    </div>  </td>
+    </tr>
 
-	
-	@else
-	<tr>
-			<td colspan="3"> <div class="text-center">
-		<button type="submit" class="btn btn-outline-danger">Confirmar</button>
-		
-			</div>	</td>
-		</tr>
-	@endif
+  
+  @else
+  <tr>
+      <td colspan="3"> <div class="text-center">
+    <button type="submit" class="btn btn-outline-danger">Confirmar</button>
+    
+      </div>  </td>
+    </tr>
+  @endif
+    @else
+   <tr>
+     <td colspan="3">
+       <div class="text-center">
+         <a href="{{url('usuario/actualizar')}}" style="color:rgba(255,0,0,1.0);">Por Favor complete su registro para poder realizar la compra</a>
+       </div>
+     </td>
+   </tr>
+    @endif
 		<!--
 			<tr>
 				<td class="text-center">

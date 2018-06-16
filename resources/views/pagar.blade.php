@@ -2,40 +2,6 @@
 
 @section('content')
 
-<?php
-
-$mp = new MP("1787728543868124", "6nXoG9IfPRwUL4BXWW2IDkweUSH40Hn6");
-
-$preference_data = array(
-    
-
-"items" => array(
-        array(
-            "id" => $orden->id,
-            "title" => 'Orden '.$orden->id,
-            "currency_id" => "ARS",
-            "category_id" => "Alimentos",
-            "quantity" => 1,
-            "unit_price" => (float)$orden->total
-        )
-    ),
-
-  "back_urls" => array(
-            "success" => url('pagos'.'/'.$orden->id.'/'.'mercadopago'),
-            "failure" => url('pagos'.'/'.$orden->id.'/'.'fail'),
-            "pending" => url('pagos'.'/'.$orden->id.'/'.'pendiente')
-        )
-
-
-
-
-);
-
-$preference = $mp->create_preference($preference_data);
-
-
-
-?>
 
 
 <div class="container">
@@ -83,7 +49,7 @@ $preference = $mp->create_preference($preference_data);
         </tr>
         
         <tr>
-        <td colspan="3"><a href="<?php echo $preference["response"]["init_point"]; ?>" name="MP-Checkout" mp-mode="[modal]" onreturn="resultadoDePago">Tarjeta de Crédito Online Mercadopago</a><br>
+        <td colspan="3"><a href="{{url('/mp/pagos').'/'.$orden->id}}">Tarjeta de Crédito Online Mercadopago</a><br>
         <img src="{{asset('/storage/p1.png')}}" alt="" width="30px">
         <img src="{{asset('/storage/p2.png')}}" alt="" width="30px">
         <img src="{{asset('/storage/p3.png')}}" alt="" width="30px">

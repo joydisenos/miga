@@ -7,7 +7,8 @@
 			
 			
 			<div class="col-md-4 formulario">
-		<a href="{{url('usuario')}}" class="btn btn-danger">Mi Cuenta</a>
+		<!--<a href="{{url('usuario')}}" class="btn btn-danger">Mi Cuenta</a>-->
+		<p><strong>Genial!</strong> Estás a un paso de finalizar tu registro, completa los siguientes datos:</p>
 	</div>
 
 
