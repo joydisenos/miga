@@ -36,6 +36,12 @@
 .card{
 	margin-bottom: 10px;
 }
+.card:hover{
+box-shadow: 0 18px 18px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	width: 100%;
+	padding: 0px 0px;
+	
+}
 .carrito-movil{
 	position: fixed;
 	bottom: 10px;
@@ -50,9 +56,42 @@
 	z-index: 1000;
 	background: rgb(255,0,0,0.8);
 }
+.bg-personalizado{
+	background-color: #00c3a7;	
+
+}
 .carrito-logo{
 	padding-top: 11px;
 	color: #ffffff;
+}
+
+.cartel{
+	height: auto;
+	padding: 1px;
+}
+.navscroll {
+	background: #eb5862;
+	color: white;
+	white-space: nowrap;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	-ms-overflow-style: -ms-autohiding-scrollbar; }
+.navscroll a{
+	color: white;
+}
+.navscroll a{
+	display: inline-block;
+	padding: 5px 12px;
+	text-decoration: none;
+			  }
+.cat-pri{
+	border-right: solid thin rgba(255,255,255,0.4);
+}
+.cat{
+	display: inline-block;
+}
+.navscroll::-webkit-scrollbar {
+	display: none;
 }
 
 @media (max-width: 600px){

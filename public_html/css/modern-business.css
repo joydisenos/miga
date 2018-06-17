@@ -5,7 +5,9 @@
  */
 
 body {
-  padding-top: 54px;
+  padding-top: 57px;
+  font-family: 'Encode Sans Condensed';font-size: 15px;
+
 }
 
 @media (min-width: 992px) {

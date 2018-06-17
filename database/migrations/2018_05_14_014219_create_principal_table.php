@@ -86,6 +86,8 @@ class CreatePrincipalTable extends Migration
 
 
             $table->longText('bienvenida');
+            $table->longText('msjfront');
+            $table->longText('msjuser');
 
             $table->timestamps();
         });

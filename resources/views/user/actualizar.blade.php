@@ -15,6 +15,7 @@
 	<div class="col-md-8 formulario">
 		<form action="{{url('usuario/actualizar')}}" method="post">
 			<input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
+			<input type = 'hidden' name = 'modal' value = '0'>
 			<div class="table-responsive">
 					<table class="table table-hover">
 					

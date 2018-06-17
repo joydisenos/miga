@@ -11,8 +11,11 @@
 		</div>
 		<div class="col-md-9 formulario">
 			<h3>Productos</h3>
+			<div>
+			<input type="text" id="filtro" placeholder="Buscar nombres de productos" class="form-control">
+		</div>
 			<div class="table-responsive">
-				<table class="table table-hover">
+				<table class="table table-hover" id="registros">
 					<thead>
 					
 							<th>Foto</th>
@@ -68,7 +71,7 @@
 				</table>
 			</div>
 					
-						{{ $productos->links() }}
+						
 					
 		</div>
 	</div>

@@ -11,7 +11,25 @@
 
     <div class="row">
 
+		<div class="col-md-4 formulario">
+            
+                        <div class="text-center">
+                            <img src="{{asset('storage/logo.svg')}}" class="img-fluid" width="200" alt="">
 
+                            <?php 
+
+                                $bienvenida = App\Principal::first(); 
+                            ?>
+                            <p>
+                                @if(!$bienvenida)
+                                
+                                @else
+                                {{$bienvenida->bienvenida}}
+                                @endif
+                            </p>
+                        </div>
+                    
+        </div>
 
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default formulario">
@@ -67,7 +85,7 @@
                                 <button type="submit" class="btn btn-danger">
                                     Iniciar sesión
                                 </button>
-
+								
                                 <a href="{{url('register')}}" class="btn btn-outline-danger">
                                     Regístrate
                                 </a>
@@ -83,25 +101,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 formulario">
-            
-                        <div class="text-center">
-                            <img src="{{asset('storage/logo.svg')}}" class="img-fluid" width="200" alt="">
-
-                            <?php 
-
-                                $bienvenida = App\Principal::first(); 
-                            ?>
-                            <p>
-                                @if(!$bienvenida)
-                                
-                                @else
-                                {{$bienvenida->bienvenida}}
-                                @endif
-                            </p>
-                        </div>
-                    
-        </div>
+        
     </div>
 </div>
 @endsection

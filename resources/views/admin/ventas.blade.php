@@ -7,17 +7,22 @@
 	<div class="row">
 
 		<div class="col-md-12 formulario">
-			<table class="table table-hover">
+			<div>
+			<input type="text" id="filtro" placeholder="Buscar nombres de productos" class="form-control">
+		</div>
+		<div class="table-responsive">
+			<table class="table table-hover" id="registros">
 		<thead>
-			<th>Orden</th>
-			<th>Pago</th>
-			<th>Total</th>
+			<th data-sort="integer" style="cursor: pointer;">Orden</th>
+			<th data-sort="float" style="cursor: pointer;">Pago</th>
+			<th data-sort="float" style="cursor: pointer;">Total</th>
 			<th>Fecha</th>
 			
 			<th>Dirección</th>
 			<th>Estatus</th>
 			<th>Detalles</th>
 			<th>Cancelar</th>
+			<th>Eliminar</th>
 
 		</thead>
 		@foreach($ventas as $venta)
@@ -33,7 +38,7 @@
 				
 				@if($venta->estatus==1)
 				
-				<a class="btn btn-outline-danger" href="{{url('admin-panel/entregar').'/'.$venta->id.'/2'}}">Por Entregar</a>
+				<a class="btn btn-outline-danger entregar" href="{{url('admin-panel/entregar').'/'.$venta->id.'/2'}}">Por Entregar</a>
 
 				@elseif($venta->estatus==2)
 				
@@ -49,7 +54,10 @@
 			</td>
 			<td><button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#orden{{$venta->id}}">Detalles</button></td>
 			<td>
-				<a class="btn btn-danger" href="{{url('admin-panel/entregar').'/'.$venta->id.'/3'}}">Cancelar</a>
+				<a class="btn btn-outline-danger cancelar" href="{{url('admin-panel/entregar').'/'.$venta->id.'/3'}}">Cancelar</a>
+			</td>
+			<td>
+				<a class="btn btn-outline-danger eliminar" href="{{url('admin-panel/entregar').'/'.$venta->id.'/4'}}">Eliminar</a>
 			</td>
 		</tr>
 
@@ -59,6 +67,7 @@
 		
 		@endforeach
 	</table>
+	</div>
 		</div>
 	</div>
 </div>
@@ -152,4 +161,138 @@
 </div>
 @endforeach
 
+@endsection
+@section('scripts')
+
+<script>
+				
+const swalWithBootstrapButtons = swal.mixin({
+  confirmButtonClass: 'btn btn-success',
+  cancelButtonClass: 'btn btn-danger',
+  buttonsStyling: false,
+});
+
+
+//tables
+				$(".dinamica").stupidtable();
+				$(".dinamica").on("aftertablesort", function (event, data) {
+        var th = $(this).find("th");
+        th.find(".arrow").remove();
+        var dir = $.fn.stupidtable.dir;
+
+        var arrow = data.direction === dir.ASC ? "&uarr;" : "&darr;";
+        th.eq(data.column).append('<span class="arrow">' + arrow +'</span>');
+      });
+
+      //panic
+
+
+$('.entregar').click(function(){
+								event.preventDefault();
+								var href = $(this).attr('href');
+								
+
+								
+
+
+
+
+
+swalWithBootstrapButtons({
+  title: 'Marcar como entregado?',
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Entregar',
+  cancelButtonText: 'Cancelar',
+  reverseButtons: true
+}).then((result) => {
+  if (result.value) {
+
+    location.href = href;
+
+  } else if (
+    
+    result.dismiss === swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons(
+      'Cancelado'
+    )
+  }
+});
+									      
+									    	});
+
+
+$('.cancelar').click(function(){
+								event.preventDefault();
+								var href = $(this).attr('href');
+								
+
+								
+
+
+
+
+
+swalWithBootstrapButtons({
+  title: 'Cancelar esta orden?',
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Marcar Cancelado',
+  cancelButtonText: 'Cancelar',
+  reverseButtons: true
+}).then((result) => {
+  if (result.value) {
+
+    location.href = href;
+
+  } else if (
+    
+    result.dismiss === swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons(
+      'Cancelado'
+    )
+  }
+});
+									      
+									    	});
+
+
+$('.eliminar').click(function(){
+								event.preventDefault();
+								var href = $(this).attr('href');
+								
+
+								
+
+
+
+
+
+swalWithBootstrapButtons({
+  title: 'Eliminar Orden?',
+  type: 'danger',
+  showCancelButton: true,
+  confirmButtonText: 'Eliminar',
+  cancelButtonText: 'Cancelar',
+  reverseButtons: true
+}).then((result) => {
+  if (result.value) {
+
+    location.href = href;
+
+  } else if (
+    
+    result.dismiss === swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons(
+      'Cancelado'
+    )
+  }
+});
+									      
+									    	});
+						
+</script>
 @endsection

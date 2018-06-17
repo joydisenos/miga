@@ -1,6 +1,5 @@
 <?php 
-			$mp = base_path("vendor\mercadopago\sdk\lib\mercadopago.php");
-            require_once $mp; 
+			
 
                 $mp = new MP("1787728543868124", "6nXoG9IfPRwUL4BXWW2IDkweUSH40Hn6");
 

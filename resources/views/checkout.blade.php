@@ -12,7 +12,7 @@
 <div class="col-md-6 formulario">
 	
 
-	<h3>Productos</h3>
+	<h3>Su pedido</h3>
 <div class="text-right">
 	
 	@if(count(Auth::user()->cupon->where('estatus','=','1')))
@@ -202,14 +202,14 @@
 		@endforeach
 
 		<tr>
-			<td colspan="3"><strong>Desea reservar para luego? indíquenos la fecha y hora</strong></td>
+			<td colspan="3"><strong>Seleccione la fecha y hora</strong></td>
 		</tr>
 		<tr>
 			<td>Día de Entrega</td>
 			<td colspan="2">
 
 				<select name="dia" class="form-control">
-					<option value="">Días de Entrega</option>
+					<option value="">- SELECCIONE DIA -</option>
 					<option value="lunes">Lunes</option>
 					<option value="martes">Martes</option>
 					<option value="miercoles">Miércoles</option>
@@ -270,7 +270,7 @@
   @else
   <tr>
       <td colspan="3"> <div class="text-center">
-    <button type="submit" class="btn btn-outline-danger">Confirmar</button>
+    <button type="submit" class="btn btn-outline-danger">Confirmar Pedido</button>
     
       </div>  </td>
     </tr>
@@ -279,7 +279,8 @@
    <tr>
      <td colspan="3">
        <div class="text-center">
-         <a href="{{url('usuario/actualizar')}}" style="color:rgba(255,0,0,1.0);">Por Favor complete su registro para poder realizar la compra</a>
+         <p style="color:rgba(255,0,0,1.0);">Por Favor complete su registro para poder realizar la compra</p>
+         <a data-toggle="modal" data-target="#datos2" class="btn btn-outline-danger">Completa tus datos!</a>
        </div>
      </td>
    </tr>
@@ -414,7 +415,7 @@
 	$(document).ready(function(){
 		swal(
           'Estamos Cerrados!',
-          'Pero puedes ordenar tus compras para luego, indíquenos el día y la hora'
+          'Pero puedes ordenar tu pedido para después, indíquenos el día y la hora'
         )
 	});
 </script>

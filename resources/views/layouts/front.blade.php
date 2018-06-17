@@ -22,6 +22,41 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
     <link href="{{asset('toast/jquery.toast.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Encode Sans Condensed' rel='stylesheet'>
+	
+	<!--Start of Zendesk Chat Script-->
+<script type="text/javascript">
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+$.src="https://v2.zopim.com/?4sVatI9wnMeDxeZbXs665I4wckvm7FKi";z.t=+new Date;$.
+type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+ $zopim(function() {
+	$zopim.livechat.window.setOffsetVertical(50);
+  });
+</script>
+<!--End of Zendesk Chat Script-->
+<script type="text/javascript"> 
+var ua = navigator.userAgent.toLowerCase(), 
+platform = navigator.platform.toLowerCase(); 
+var url=window.location.href;
+platformName = ua.match(/ip(?:ad|od|hone)/) ? 'ios' : (ua.match(/(?:webos|android)/) || platform.match(/mac|win|linux/) || ['other'])[0], 
+isMobile = /ios|android|webos/.test(platformName); 
+if (isMobile && url!="www.sondemiga.com") { 
+$zopim(function(){ 
+$zopim.livechat.hideAll(); 
+$zopim.livechat.setOnChatStart(function(){
+$zopim.livechat.setOnUnreadMsgs(unread);
+function unread(number) {
+if (number>0){
+$zopim.livechat.window.show();
+} 
+}
+}); 
+});
+} 
+</script>
+
 
   </head>
 
@@ -30,19 +65,57 @@
     <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-danger text-white fixed-top">
       <div class="container">
+         
         <a class="navbar-brand" href="{{url('/')}}">
 <img src="{{asset('storage/logo.svg')}}" width="150" alt="">
         </a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+
+        @guest
+        <a class="btn btn-outline-light d-block d-lg-none" style="width:auto;" href="{{url('/login')}}">
+         <i class="fas fa-user"></i> Ingresar
+        </a>
+        @else
+		<div class="dropdown">
+				<button class="btn btn-outline-light btn-sm d-block d-lg-none dropdown-toggle" style="width:auto;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<i class="fas fa-user"></i>	Mi Cuenta
+				</button>
+			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+			
+				<a class="dropdown-item" href="{{url('usuario')}}"><i class="fas fa-user"></i> Mis Datos</a>
+
+                <a class="dropdown-item" href="{{url('usuario/compras')}}"><i class="fab fa-apple"></i> Mis Pedidos</a>
+
+                <a class="dropdown-item" href="{{url('usuario/canje')}}"><i class="fas fa-star"></i> Canjear Puntos</a>
+
+                
+
+                
+               
+                
+
+                <hr>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();">
+                   <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+
+			</div>
+		</div>
+       
+        @endguest
+       
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
 
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Categorías
+                <font color="yellow">Categorías</font>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 
@@ -67,27 +140,27 @@
             
             @guest
             <li class="nav-item">
-              <a class="nav-link" href="{{url('register')}}">Registro</a>
+              <a class="nav-link" href="{{url('register')}}"><font color="white"><b>Registrate</b></font></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{url('login')}}">Iniciar Sesión</a>
+              <a class="btn btn-outline-warning nav-link" href="{{url('login')}}"><font color="white"><b>Iniciar Sesión</b></font></a>
             </li>
             @else
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{title_case(Auth::user()->name)}}
-              </a>
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><font color="white">
+                <i class="fas fa-user"></i> Mi cuenta
+              </font></a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
                 
                 <!--
                 <a class="dropdown-item" href="{{url('admin-panel')}}">Panel de Control</a>
                 -->
 
-                <a class="dropdown-item" href="{{url('usuario')}}">Mi Cuenta</a>
+                <a class="dropdown-item" href="{{url('usuario')}}"><i class="fas fa-user"></i> Mis Datos</a>
 
-                <a class="dropdown-item" href="{{url('usuario/compras')}}">Mis Compras</a>
+                <a class="dropdown-item" href="{{url('usuario/compras')}}"><i class="fab fa-apple"></i> Mis Pedidos</a>
 
-                <a class="dropdown-item" href="{{url('usuario/canje')}}">Canje de Puntos</a>
+                <a class="dropdown-item" href="{{url('usuario/canje')}}"><i class="fas fa-star"></i> Canjear Puntos</a>
 
                 
 
@@ -99,7 +172,7 @@
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                    document.getElementById('logout-form').submit();">
-                    Cerrar Sesión
+                   <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                 </a>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -113,11 +186,12 @@
             <li class="nav-item">
               <a class="nav-link" href="#" data-toggle="modal" data-target="#carrito">  
                 
-                <i class="fas fa-shopping-cart"></i> &nbsp; 
+                <font color="white"><i class="fas fa-shopping-cart"></i> &nbsp; 
 
                 {{Auth::user()->compra->where('ordene_id','=',0)->count()}}
                 
-              </a>
+              </font>
+			  </a>
             </li>
 
             @endif
@@ -129,6 +203,7 @@
           </ul>
         </div>
       </div>
+	  
     </nav>
 
     
@@ -306,10 +381,10 @@
       </tr>
       <tr>
         <td>
-          Observaciones
+          Detalles adicionales
         </td>
         <td>
-          <input type="text" class="form-control" name="referencia" placeholder="Sitios de referencia">
+          <input type="text" class="form-control" name="referencia" placeholder="detalles adicionales">
         </td>
       </tr>
       <tr>
@@ -322,6 +397,73 @@
       </tr>
 
     </table>
+    </div>
+
+   
+                  
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-danger">Guardar</button>
+ </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal Datos -->
+
+<div class="modal fade" id="datos2" tabindex="-1" role="dialog" aria-labelledby="datosTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Compete los siguientes datos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+   
+      <div class="table-responsive">
+     <form action="{{url('usuario/actualizar')}}" method="post">
+            <input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
+            <input type = 'hidden' name = 'modal' value = '1'>
+            <div class="table-responsive">
+                    <table class="table table-hover">
+                    
+                    <tr>
+                        <td>
+                            Teléfono 1
+                        </td>
+                        <td>
+                            <input type="number" placeholder="Ingrese un número de teléfono"  name="telefono1" class="form-control" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Teléfono 2
+                        </td>
+                        <td>
+                            <input type="number" placeholder="Ingrese un número de teléfono"  name="telefono2" class="form-control">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Fecha de Nacimiento
+                        </td>
+                        <td>
+                            <input type="date" class="form-control" name="nacimiento" placeholder="AAAA/MM/DD" required>
+                        </td>
+                    </tr>
+                    
+
+                </table>
+        </div>
+
+        
     </div>
 
    

@@ -17,7 +17,8 @@ use App\Premio;
 use App\Cupone;
 use App\Direccione;
 
-
+$mp = base_path("/vendor/mercadopago/sdk/lib/mercadopago.php");
+require_once $mp;
 
 class UsuarioController extends Controller
 {
@@ -84,7 +85,7 @@ class UsuarioController extends Controller
             $cuponesuser->cupone_id = $id;
             $cuponesuser->save();
 
-            return redirect ('usuario/canje')->with('status','Cupón Obtenido, en tu próximo pedido podrás usas este cupón de descuento! ');
+            return redirect ('usuario/canje')->with('status','Cupón Obtenido, en tu próximo pedido podrás usar este cupón de descuento! ');
 
         }else{
         
@@ -221,7 +222,10 @@ class UsuarioController extends Controller
         $dato->nacimiento = $request->nacimiento;
         $dato->save();
 
-        return redirect('usuario')->with('status','Datos Actualizados Correctamente');
+        if($request->modal == 1){
+            return redirect()->back()->with('status','Datos Actualizados Correctamente');    
+        }else{
+            return redirect('usuario')->with('status','Datos Actualizados Correctamente');}
         }
 
         $id = Auth::user()->dato->id;
@@ -234,6 +238,35 @@ class UsuarioController extends Controller
         $dato->telefono1 = $request->telefono1;
         $dato->telefono2 = $request->telefono2;
         $dato->nacimiento = $request->nacimiento;
+        $dato->save();
+
+        
+            
+        
+
+        return redirect()->back()->with('status','Datos Actualizados Correctamente');
+    } 
+
+    public function actualizar2()
+    {
+        $dato = Auth::user()->dato;
+
+        return view('user.actualizardatos',compact('dato'));
+    }
+
+    public function actualizar_store2(Request $request)
+    {
+       
+        $dato = Auth::user()->dato;
+        
+        $dato = Dato::findOrFail($id);
+        $dato->telefono1 = $request->telefono1;
+        if(is_null($request->telefono2))
+        {
+            $request->telefono2 = 'Sin número';
+        }else{
+            $dato->telefono2 = $request->telefono2;
+        }
         $dato->save();
 
         
@@ -326,18 +359,59 @@ class UsuarioController extends Controller
                         $orden->estatus = 3;
                         $orden->save();
 
+                        $productos = Compra::where('ordene_id','=','0')->where('user_id','=', $user_id)->get();
 
-        return redirect('usuario')->with('status','Su pago esta en estatus pendiente, en breve verificaremos su transacción');
+                        foreach ($productos as $producto)
+                        {
+                            $producto->ordene_id = $id;
+                            $producto->save();
+                        }
+
+         Mail::to('pedidos@sondemiga.com','Sondemiga.com')
+
+                   ->send(new OrdenMail($orden));
+
+        return redirect('usuario')->with('status','Su pago se encuentra pendiente, en breve verificaremos su transacción y nos comunicaremos con usted');
     }
 
-    
+    public function pedido_mp($id)
+    {
+
+
+
+            $user_id=Auth::user()->id;
+                
+            $orden = Ordene::findOrFail($id);
+            $orden->pago = 'mercadopago';
+            $orden->estatus = 1;
+            $orden->save();
+
+            $productos = Compra::where('ordene_id','=','0')->where('user_id','=', $user_id)->get();
+
+            foreach ($productos as $producto)
+            {
+                $producto->ordene_id = $id;
+                $producto->save();
+            }       
+      
+
+            Mail::to('pedidos@sondemiga.com','Sondemiga.com')
+
+                   ->send(new OrdenMail($orden));
+
+
+        
+
+        return view ('mporden',compact('orden'));
+
+    }
 
     public function success( $id , Request $request)
     {
 
         
 
-                        $user_id=Auth::user()->id;
+        $user_id=Auth::user()->id;
         
                         $orden = Ordene::findOrFail($id);
                         $orden->pago = 'mercadopago N°'.$request->id;
@@ -397,38 +471,6 @@ class UsuarioController extends Controller
                 }
     }
 
-    public function pedido_mp($id)
-    {
-
-
-
-            $user_id=Auth::user()->id;
-                
-            $orden = Ordene::findOrFail($id);
-            $orden->pago = 'mercadopago por procesar';
-            $orden->estatus = 3;
-            $orden->save();
-
-            $productos = Compra::where('ordene_id','=','0')->where('user_id','=', $user_id)->get();
-
-            foreach ($productos as $producto)
-            {
-                $producto->ordene_id = $id;
-                $producto->save();
-            }       
-      
-
-            Mail::to('pedidos@sondemiga.com','Sondemiga.com')
-
-                   ->send(new OrdenMail($orden));
-
-
-        
-
-        return view ('mporden',compact('orden'));
-
-    }
-
     public function definir_pago ($id, $tipo)
     {
 
@@ -447,6 +489,7 @@ class UsuarioController extends Controller
                 $producto->save();
             }
         
+       
 
             Mail::to('pedidos@sondemiga.com','Sondemiga.com')
 
@@ -455,7 +498,7 @@ class UsuarioController extends Controller
 
         
 
-        return redirect ('usuario')->with('status','Compra realizada con éxito, en breves momentos se realizará el envío de su pedido');
+        return redirect ('usuario')->with('status','Compra realizada con éxito, enseguida recibirás la confirmación de tu pedido por teléfono. Tus puntos serán actualizados cuando se entregue el pedido. Muchas gracias');
     }
    
 }

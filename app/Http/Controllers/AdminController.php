@@ -21,10 +21,10 @@ class AdminController extends Controller
 
     public function index()
     {
-        $usuarios = User::all()->count();
+        $usuarios = User::where('estatus','!=', 0)->count();
         $productos = Producto::all()->count();
-        $ventas = Ordene::where('pago','!=','pendiente')->count();
-        $notificaciones = Ordene::where('estatus','=',1)->get();
+         $ventas = Ordene::where('pago','!=','pendiente')->where('estatus','!=',4)->count();
+         $notificaciones = Ordene::where('estatus','=',1)->get();
         $principal = Principal::first();
          if(!$principal)
          {
@@ -83,7 +83,7 @@ class AdminController extends Controller
 
     public function producto_index()
     {
-        $productos = Producto::paginate(10);
+        $productos = Producto::all();
 
         
         return view('admin.productos', compact('productos'));
@@ -285,7 +285,7 @@ class AdminController extends Controller
     }
     public function ventas_index()
     {
-        $ventas = Ordene::where('pago','!=','pendiente')->get();
+        $ventas = Ordene::where('pago','!=','pendiente')->where('estatus','!=',4)->orderBy('id','desc')->get();
 
         return view('admin.ventas',compact('ventas'));
     }
@@ -371,13 +371,26 @@ class AdminController extends Controller
         $venta->estatus = $estatus;
         $venta->save();
 
+        if($estatus == 2)
+        {
+
         $userid = $venta->user_id;
 
         $dato = Dato::where('user_id', '=', $userid)->first();
         $dato->puntos = $dato->puntos + ($venta->total / 2);
         $dato->save();
 
-        return redirect()->back()->with('status','Orden Marcada como Entregado');
+        
+            return redirect()->back()->with('status','Orden Marcada como Entregado');
+        }
+        elseif($estatus == 3)
+        {
+            return redirect()->back()->with('status','Orden Cancelada');
+        }
+        elseif($estatus == 4)
+        {
+            return redirect()->back()->with('status','Orden Eliminada');
+        }
     }
     public function config()
     {

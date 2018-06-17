@@ -50,6 +50,7 @@ Route::prefix('usuario')->middleware('auth')->group(function(){
   Route::get('/direccion','UsuarioController@direccion');
   Route::post('/direccion','UsuarioController@direccion_agregar');
   Route::get('/actualizar','UsuarioController@actualizar');
+  Route::get('/actualizardatos','UsuarioController@actualizar2');
   Route::post('/actualizar','UsuarioController@actualizar_store');
   Route::get('direccion/borrar/{id}','UsuarioController@direccion_borrar');
   Route::get('compra/borrar/{id}','UsuarioController@compra_borrar');
@@ -65,9 +66,9 @@ Route::prefix('usuario')->middleware('auth')->group(function(){
 
 Route::prefix('admin-panel')->middleware(['role:admin|dev'])->group(function(){
 
-  //Usuarios 
+  //users
   Route::get('/usuario/eliminar/{id}','AdminController@eliminar_user');
-
+  
   Route::get('/','AdminController@index');
   Route::get('/productos','AdminController@producto_index');
   Route::get('/producto','AdminController@producto_new');
@@ -118,6 +119,8 @@ Route::prefix('admin-panel')->middleware(['role:admin|dev'])->group(function(){
 
 
 });
+
+/*
 
 //dato Routes
 Route::group(['middleware'=> 'web'],function(){
@@ -174,3 +177,4 @@ Route::group(['middleware'=> 'web'],function(){
   Route::get('producto/{id}/delete','\App\Http\Controllers\ProductoController@destroy');
   Route::get('producto/{id}/deleteMsg','\App\Http\Controllers\ProductoController@DeleteMsg');
 });
+*/

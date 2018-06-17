@@ -10,7 +10,7 @@
 	
 <div class="col-md-12 formulario">
 	
-
+	<p><b><font color="green">Genial: ¡Último Paso!</font></b></p>
 	<h3>Elegir Método de Pago</h3>
 <div class="table-responsive">
 	<table class="table table-hover">
@@ -41,23 +41,15 @@
 
         </tr>
         <tr>
-        <td colspan="3"><a href="{{url('pago').'/'.$orden->id.'/'.'efectivo'}}">Efectivo</a>
+        <td colspan="3"><a class="btn btn-success" href="{{url('pago').'/'.$orden->id.'/'.'efectivo'}}"><i class="fas fa-money-bill-alt"></i> Pagar en efectivo</a>
        
-        <img src="{{asset('/storage/cash.png')}}" width="30px" alt="">
         </td>
         
         </tr>
         
         <tr>
-        <td colspan="3"><a href="{{url('/mp/pagos').'/'.$orden->id}}">Tarjeta de Crédito Online Mercadopago</a><br>
-        <img src="{{asset('/storage/p1.png')}}" alt="" width="30px">
-        <img src="{{asset('/storage/p2.png')}}" alt="" width="30px">
-        <img src="{{asset('/storage/p3.png')}}" alt="" width="30px">
-        <img src="{{asset('/storage/p4.png')}}" alt="" width="30px">
-        <img src="{{asset('/storage/p5.png')}}" alt="" width="30px">
-        <img src="{{asset('/storage/p7.png')}}" alt="" width="30px">
-        <img src="{{asset('/storage/p8.png')}}" alt="" width="30px">
-
+        <td colspan="3"><a class="btn btn-warning" href="{{url('/mp/pagos').'/'.$orden->id}}"><i class="far fa-credit-card"></i> Tarjeta de credito o debito Online</a>
+        <small>Pago procesado por mercadopago.</small>
 
 
         <script type="text/javascript" src="//resources.mlstatic.com/mptools/render.js"></script>
@@ -82,13 +74,8 @@
         </tr>
         
         <tr>
-        <td colspan="3"><a href="{{url('pago').'/'.$orden->id.'/'.'tarjetaAlDelivery'}}">Tarjeta de Crédito al Delivery</a><br>
-
-        <img src="{{asset('/storage/p2.png')}}" alt="" width="30px">
-        <img src="{{asset('/storage/p3.png')}}" alt="" width="30px">
-        <img src="{{asset('/storage/p4.png')}}" alt="" width="30px">
-        <img src="{{asset('/storage/p5.png')}}" alt="" width="30px">
-        <img src="{{asset('/storage/p7.png')}}" alt="" width="30px">
+        <td colspan="3"><a class="btn btn-outline-danger" href="{{url('pago').'/'.$orden->id.'/'.'tarjetaAlDelivery'}}"><i class="far fa-credit-card"></i> Tarjeta de Crédito al Delivery</a>
+		<small>Pagale con tarjeta al delivery.</small>
         </td>
         </tr>
 

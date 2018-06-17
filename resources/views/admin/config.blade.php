@@ -28,6 +28,26 @@
 				</tr>
 
 				<tr>
+					<td>
+						Cartel Front
+					</td>
+
+					<td>
+						<textarea name="msjfront" class="form-control" id="msjfront" cols="30" rows="10" required>{{$principal->msjfront}}</textarea>
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						Cartel Usuario
+					</td>
+
+					<td>
+						<textarea name="msjuser" class="form-control" id="msjuser" cols="30" rows="10" required>{{$principal->msjuser}}</textarea>
+					</td>
+				</tr>
+
+				<tr>
 					<th colspan="2" class="text-center">Ventas</th>
 				</tr>
 

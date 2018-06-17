@@ -31,7 +31,7 @@ class User extends Authenticatable
 
     public function dato()
     {
-        return $this->hasOne(Dato::class);
+        return $this->hasOne(Dato::class,'user_id');
     }
 
     public function direccion()

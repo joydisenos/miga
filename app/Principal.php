@@ -41,7 +41,9 @@ class Principal extends Model
     	'sabadoct',
     	'domingoat',
     	'domingoct',
-    	'bienvenida'
+    	'bienvenida',
+        'msjfront',
+        'msjuser'
     ];
   	
   	protected $guarded = ['id'];

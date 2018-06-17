@@ -2,22 +2,25 @@
 
 @section('content')
 
+@include('includes.carteluser')
+
 
 <div class="container">
 	<div class="row">
 		<div class="col-md-4 formulario">
-			<a href="{{url('/usuario/actualizar')}}" class="btn btn-danger">Actualizar Datos</a>
+			<a href="{{url('/usuario/actualizardatos')}}" class="btn btn-danger">Actualizar Datos</a>
+			<a href="{{url('/')}}" class="btn btn-success">Ver Sabores & Promociones</a>
 		</div>
 		<div class="col-md-8 formulario">
 			<div>
-				<h3>Perfil {{title_case(Auth::user()->name)}}</h3>
+				<h3>Hola {{title_case(Auth::user()->name)}}!</h3>
 			</div>
 			
 <div class="table-responsive">
 			<table class="table table-hover">
 				<tr>
-					<td><strong>Puntos Acumulados</strong></td>
-					<td><strong>{{Auth::user()->dato->puntos}}</strong></td>
+					<td><font color="green"><strong>Puntos Acumulados</strong></font></td>
+					<td><font color="green"><strong>{{Auth::user()->dato->puntos}}</strong></font></td>
 				</tr>
 				<tr>
 					<td>Teléfono 1</td>
@@ -43,11 +46,15 @@
 				@foreach(Auth::user()->direccion->where('estatus','=',1) as $direccion)
 				<tr>
 					<td>{{$direccion->direccion}}, Código Postal {{$direccion->zip}}, {{$direccion->referencia}}</td>
-					<td> <a href="{{url('usuario/direccion/borrar').'/'.$direccion->id}}" class="btn btn-danger">X</a></td>
+					<td> <a href="{{url('usuario/direccion/borrar').'/'.$direccion->id}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
 				</tr>
 				@endforeach
 			</table>
 			</div>
+		</div>
+		<div class="col-md-4">
+			<a href="{{url('usuario/compras')}}" class="btn btn-info">Mis Pedidos</a>
+            <a href="{{url('usuario/canje')}}" class="btn btn-info">Canjear puntos</a>
 		</div>
 	</div>
 </div>

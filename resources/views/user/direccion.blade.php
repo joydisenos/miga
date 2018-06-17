@@ -61,10 +61,10 @@
 			</tr>
 			<tr>
 				<td>
-					Observaciones
+					Detalles adicionales
 				</td>
 				<td>
-					<input type="text" class="form-control" name="referencia" placeholder="Sitios de referencia">
+					<input type="text" class="form-control" name="referencia" placeholder="Detalles adicionales">
 				</td>
 			</tr>
 			<tr>

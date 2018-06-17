@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
     <link href="{{asset('toast/jquery.toast.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Encode Sans Condensed' rel='stylesheet'>
 
   </head>
 
@@ -42,6 +43,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{{url('/admin-panel/productos')}}">Productos</a>
             </li>
+			<li class="nav-item">
+              <a class="nav-link" href="{{url('/admin-panel/usuarios')}}">Usuarios</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="{{url('/admin-panel/premios')}}">Premios</a>
             </li>
@@ -55,7 +59,8 @@
               <a class="nav-link" href="{{url('/admin-panel/canje')}}">Canje</a>
             </li>
 
-            <?php $notificaciones = App\Ordene::where('estatus','=',1)->get();
+            <?php 
+            $notificaciones = App\Ordene::where('estatus','=',1)->get();
             $notificacionesCount = App\Ordene::where('estatus','=',1)->count();
              ?>
                 @if(count($notificaciones))
@@ -125,9 +130,10 @@
     <!-- Bootstrap core JavaScript -->
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('js/sweetalert2.all.js')}}"></script>
-    <script src="{{asset('vendor/slick/slick.min.js')}}"></script>
+     <script src="{{asset('js/sweetalert2.all.js')}}"></script>
+     <script src="{{asset('js/stupidtable.min.js')}}"></script>
     @yield('scripts')
+    @include('includes.filtro')
   </body>
 
 </html>
