@@ -87,6 +87,7 @@ Route::prefix('admin-panel')->middleware(['role:admin|dev'])->group(function(){
    Route::get('/premio/{id}','AdminController@premio_editar');
    Route::post('/premio/{id}','AdminController@premio_actualizar');
    Route::get('/cambiar/{id}/{estatus}','AdminController@entregar_premio');
+   Route::get('/destacar/{id}/{estatus}','AdminController@producto_destacar');
 
 
 //Cupones

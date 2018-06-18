@@ -179,6 +179,27 @@
 <br>
 <h3>Pedi Online y sumá puntos</h3>
 <hr>
+
+@if(count($destacados))
+<h4>Productos Recomendados</h4>
+ <section class="navscroll" style="background:#fff;">
+  <div class="container">
+  <nav class="cat">
+  @foreach($destacados as $destacado)
+    
+      <a href="#" data-toggle="modal" data-target="#producto{{$destacado->id}}">
+        <img height="150" src="{{asset('storage').'/'.$destacado->foto}}" alt="{{$destacado->nombre}}">
+      </a>
+    
+  @endforeach
+   
+  </nav>
+  </div>
+</section>
+<hr>
+@endif
+
+
     <div class="row">
        <div class="col-md-8 d-none d-md-block">
            
@@ -201,7 +222,7 @@
 				  <p><strong>Precio:</strong> ${{$producto->precio}}</p>
                   <p class="card-text">{{str_limit($producto->descripcion, 100)}}</p>
                   <center>
-				  <a href="{{url('compra').'/'.$producto->id}}" class="btn btn-danger">Ver Producto</a>
+				  <a href="#" data-toggle="modal" data-target="#producto{{$producto->id}}" class="btn btn-danger">Ver Producto</a>
 				  </center>
                 </div>
               </div>
@@ -222,7 +243,7 @@
       <div class="container">
          <div class="row">
                 <div class="col">
-                  <a href="{{url('compra').'/'.$producto->id}}">
+                  <a href="#" data-toggle="modal" data-target="#producto{{$producto->id}}">
                   <img class="img-fluid" src="{{asset('storage').'/'.$producto->foto}}" alt="{{$producto->nombre}}">
                   </a>
                 </div>
@@ -245,7 +266,7 @@
                   
 				  <p class="d-none d-sm-block">
                     {{str_limit($producto->descripcion, 100)}}</p>
-                  <a href="{{url('compra').'/'.$producto->id}}" class="btn btn-danger">Ver producto</a>
+                  <a href="#" data-toggle="modal" data-target="#producto{{$producto->id}}" class="btn btn-danger">Ver producto</a>
                 </div>
                
                   
@@ -270,6 +291,129 @@
     </div>
 </div>
 
+@foreach($productos as $producto)
+
+<!-- Modal -->
+<div class="modal fade" id="producto{{$producto->id}}" tabindex="-1" role="dialog" aria-labelledby="producto{{$producto->id}}CenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{title_case($producto->nombre)}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container">
+
+          <div class="row">
+            <div class="col">
+              <img class="img-fluid" src="{{asset('storage').'/'.$producto->foto}}" alt="{{$producto->nombre}}">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+               <h4 class="text-left"><b>Precio: $<span id="precio{{$producto->id}}">{{$producto->precio}}</span></b></h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col md-6">
+              <p class="text-right"><font color="green"><i class="fas fa-truck"></i> Delivery disponible</font></p>
+              <p>{{$producto->descripcion}}</p>
+            </div>
+            <div class="col md-6">
+              @guest
+              <h4>Para realizar compras debes iniciar sesión</h4>
+              <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                        {{ csrf_field() }}
+
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-12 control-label">Correo Electrónico</label>
+
+                            <div class="col-md-12">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <label for="password" class="col-md-12 control-label">Contraseña</label>
+
+                            <div class="col-md-12">
+                                <input id="password" type="password" class="form-control" name="password" required>
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Recordar usuario
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12 col-md-offset-4">
+                                <button type="submit" class="btn btn-danger">
+                                    Iniciar sesión
+                                </button>
+                
+                                <a href="{{url('register')}}" class="btn btn-outline-danger">
+                                    Regístrate
+                                </a>
+                                <br>
+
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    Olvido su clave?
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+              @else
+              <form action="{{url('comprar')}}" method="post">
+            <input type = 'hidden' name = '_token' value = '{{Session::token()}}'>
+            <input type="hidden" name="producto_id" value="{{$producto->id}}">
+            <select class="form-control" name="cantidad" id="cantidad{{$producto->id}}">
+              <?php 
+              $cantidades = explode(',',$producto->cantidades);
+               ?>
+              @foreach($cantidades as $cantidad)
+              <option value="{{$cantidad}}">{{$cantidad}} {{$producto->cantidadesdesc}}</option>
+              @endforeach
+            </select>
+            <br> 
+            <button class="btn btn-danger"><i class="fas fa-shopping-cart"></i> Añadir al pedido</button>
+           
+          </form>
+         
+              @endguest
+            </div>
+          </div>
+        </div>        
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</div>
+
+@endforeach
+
 @endsection
 @section('scripts')
 <script src="{{asset('/vendor/height/jquery.matchHeight-min.js')}}"></script>
@@ -285,5 +429,21 @@
   autoplaySpeed: 3000,
   arrows: false,
 });
+
+@foreach($productos as $producto)
+            var precio{{$producto->id}} = {{$producto->precio}};
+              var value{{$producto->id}} = $('#cantidad{{$producto->id}}').val();
+              $('#precio{{$producto->id}}').text(value{{$producto->id}}*precio{{$producto->id}});
+
+                $('#cantidad{{$producto->id}}').change(function(){
+
+                var precio{{$producto->id}} = {{$producto->precio}};
+                var value{{$producto->id}} = $('#cantidad{{$producto->id}}').val();
+
+                $('#precio{{$producto->id}}').text(value{{$producto->id}}*precio{{$producto->id}});
+              
+                });
+@endforeach
+          
 </script>
 @endsection

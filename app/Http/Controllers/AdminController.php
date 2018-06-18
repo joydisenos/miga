@@ -69,7 +69,16 @@ class AdminController extends Controller
         $producto->estatus = $estatus;
         $producto->save();
 
-        return redirect('admin-panel/productos');
+        return redirect()->back()->with('status','Estatus modificado exitosamente');
+    }
+
+    public function producto_destacar($id, $estatus)
+    {
+        $producto = Producto::findOrFail($id);
+        $producto->destacado = $estatus;
+        $producto->save();
+
+        return redirect()->back()->with('status','Estatus modificado exitosamente');
     }
 
     public function premio_activar($id, $estatus)

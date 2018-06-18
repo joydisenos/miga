@@ -24,6 +24,7 @@
 							<th>Precio</th>
 							<th>Cantidades</th>
 							<th>Visibilidad</th>
+							<th>Destacar</th>
 							<th></th>
 					
 					</thead>
@@ -56,6 +57,14 @@
 								<a class="btn btn-success" href="{{url('admin-panel/activar').'/'.$producto->id.'/2'}}">Activo</a>
 								@elseif($producto->estatus==2)
 								<a class="btn btn-danger" href="{{url('admin-panel/activar').'/'.$producto->id.'/1'}}">Oculto</a>
+								@endif
+							</td>
+								
+							<td>
+								@if($producto->destacado==0)
+								<a class="btn btn-outline-success" href="{{url('admin-panel/destacar').'/'.$producto->id.'/1'}}">Destacar</a>
+								@elseif($producto->estatus==1)
+								<a class="btn btn-outline-warning" href="{{url('admin-panel/destacar').'/'.$producto->id.'/0'}}">Destacado</a>
 								@endif
 							</td>
 							

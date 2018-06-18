@@ -15,18 +15,20 @@ class SiteController extends Controller
     public function index()
     {
     	//principal
-    	$productos = Producto::where('estatus','=','1')->get();
+        $productos = Producto::where('estatus','=','1')->get();
+    	$destacados = Producto::where('estatus','=','1')->where('destacado','=','1')->get();
         $categorias = Categoria::where('estatus','=','1')->get();
 
-        return view('inicio',compact('productos','categorias'));
+        return view('inicio',compact('productos','categorias','destacados'));
     }
 
     public function filtro($categoria)
     {
         $productos = Producto::where('estatus','=','1')->where('categoria_id','=',$categoria)->get();
+        $destacados = Producto::where('estatus','=','1')->where('destacado','=','1')->get();
         $categorias = Categoria::where('estatus','=','1')->get();
 
-        return view('inicio',compact('productos','categorias'));
+        return view('inicio',compact('productos','categorias','destacados'));
     }
 
     public function show($id)
@@ -44,7 +46,7 @@ class SiteController extends Controller
     	$compra->producto_id = $request->producto_id;
     	$compra->cantidad = $request->cantidad;
     	$compra->save();
-    	return redirect('/checkout')->with('status','Producto agregado al carrito exitosamente!');
+    	return redirect()->back()->with('status','Producto agregado al carrito exitosamente!');
     }
 
     public function cupon ($id)
