@@ -79,7 +79,7 @@ box-shadow: 0 18px 18px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 .navscroll a{
 	color: white;
 }
-.navscroll a{
+.navscroll a, .navscroll div{
 	display: inline-block;
 	padding: 5px 12px;
 	text-decoration: none;

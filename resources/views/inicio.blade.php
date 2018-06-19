@@ -187,9 +187,14 @@
   <nav class="cat">
   @foreach($destacados as $destacado)
     
-      <a href="#" data-toggle="modal" data-target="#producto{{$destacado->id}}">
+      <div class="text-center">
+        <a href="#" data-toggle="modal" data-target="#producto{{$destacado->id}}" class="d-block">
         <img height="150" src="{{asset('storage').'/'.$destacado->foto}}" alt="{{$destacado->nombre}}">
       </a>
+      <a href="#" data-toggle="modal" data-target="#producto{{$destacado->id}}" class="d-block" style="color:#000">
+        {{$destacado->nombre}}
+      </a>
+      </div>
     
   @endforeach
    
@@ -314,7 +319,7 @@
           </div>
           <div class="row">
             <div class="col">
-               <h4 class="text-left"><b>Precio: $<span id="precio{{$producto->id}}">{{$producto->precio}}</span></b></h4>
+               <h4 class="text-left"><b>Precio: $<span @guest @else id="precio{{$producto->id}}" @endguest >{{$producto->precio}}</span></b></h4>
             </div>
           </div>
           <div class="row">
