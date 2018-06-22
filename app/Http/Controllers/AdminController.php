@@ -10,6 +10,7 @@ use App\Cupone;
 use App\Principal;
 use App\Categoria;
 use App\Ordene;
+use App\Compra;
 use App\Dato;
 use App\User;
 
@@ -406,5 +407,12 @@ class AdminController extends Controller
         $principal = Principal::first();
 
         return view('admin.config',compact('principal'));
+    }
+
+    public function reportes()
+    {
+         $ventas = Ordene::where('pago','!=','pendiente')->where('estatus','!=',4)->orderBy('id','desc')->get();
+
+        return view('admin.reportes',compact('ventas'));
     }
 }

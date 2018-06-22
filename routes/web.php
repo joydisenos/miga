@@ -118,6 +118,9 @@ Route::prefix('admin-panel')->middleware(['role:admin|dev'])->group(function(){
 
    Route::get('/config','AdminController@config');
 
+   //Reportes
+  Route::get('/reportes','AdminController@reportes');   
+
 
 });
 
